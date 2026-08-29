@@ -100,6 +100,24 @@
   .phone-line a{color:var(--dim);text-decoration:underline;text-decoration-color:rgba(200,177,144,0.4);}
   .phone-line a:hover{color:var(--accent);text-decoration-color:var(--accent);}
 
+  /* ---------- INQUIRY FORM ---------- */
+  .inquiry-form{
+    display:grid;grid-template-columns:1fr 1fr;gap:18px;
+    max-width:560px;margin-bottom:36px;
+  }
+  .inquiry-form .field:nth-child(3),
+  .inquiry-form .field:nth-child(4){grid-column:1 / -1;}
+  .inquiry-form button{grid-column:1 / -1;justify-self:start;margin-top:4px;}
+  .form-status{
+    background:rgba(75,122,78,0.18);border:1px solid var(--low);color:var(--cream);
+    padding:14px 18px;margin-bottom:24px;max-width:560px;
+    font-family:'IBM Plex Mono', monospace;font-size:13px;
+  }
+  @media (max-width:560px){
+    .inquiry-form{grid-template-columns:1fr;}
+    .inquiry-form .field:nth-child(3), .inquiry-form .field:nth-child(4){grid-column:auto;}
+  }
+
   @media (max-width:640px){
     .process{flex-direction:column;gap:28px;}
     .process::before{display:none;}
@@ -215,10 +233,38 @@
 <footer id="contact" class="site-footer-full">
   <div class="wrap">
     <h2>Get In Touch</h2>
-    <p class="lead-f">Based in Goodyear, AZ. Email me directly, or find me on social media below.</p>
+    <p class="lead-f">Tell me a bit about yourself and what you're training for, and I'll get back to you.</p>
+
+    <div id="formStatus" class="form-status" hidden>Thanks — that's sent. I'll get back to you soon.</div>
+
+    <form id="inquiryForm" class="inquiry-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="field">
+        <label for="inq-name">Name</label>
+        <input type="text" id="inq-name" name="name" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="inq-email">Email</label>
+        <input type="email" id="inq-email" name="email" required autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="inq-goal">What are you training for?</label>
+        <input type="text" id="inq-goal" name="training_for" placeholder="e.g. first 50K, a specific 100-miler, coming back from injury">
+      </div>
+      <div class="field">
+        <label for="inq-message">Message</label>
+        <textarea id="inq-message" name="message" required placeholder="Tell me about your goals, experience, and what you're looking for in a coach."></textarea>
+      </div>
+
+      <!-- Spam trap: real visitors never fill this in; bots often do. -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="_subject" value="New coaching inquiry — jcady.org">
+      <input type="hidden" name="_next" id="inq-next" value="">
+
+      <button type="submit" class="btn">Send Inquiry &rarr;</button>
+    </form>
 
     <div class="contact-row">
-      <a class="btn" href="mailto:jeff@jcady.org">Email jeff@jcady.org</a>
+      <a class="btn ghost-dark" href="mailto:jeff@jcady.org">Email jeff@jcady.org</a>
     </div>
 
     <div class="social-links">
@@ -240,6 +286,23 @@
   document.querySelectorAll('.ring[data-ring]').forEach(el=>{
     el.innerHTML = waypointIcon(el.dataset.ring, 44);
   });
+
+  // Point Formspree's redirect back at this exact page, whatever domain
+  // it ends up live on, and land on the contact section with ?sent=true.
+  const nextField = document.getElementById('inq-next');
+  if(nextField){
+    nextField.value = window.location.origin + window.location.pathname + '?sent=true#contact';
+  }
+
+  // If we just got redirected back from a successful submission, show
+  // the confirmation banner and clean the URL up.
+  if(window.location.search.includes('sent=true')){
+    const status = document.getElementById('formStatus');
+    if(status) status.hidden = false;
+    const form = document.getElementById('inquiryForm');
+    if(form) form.hidden = true;
+    history.replaceState(null, '', window.location.pathname + '#contact');
+  }
 </script>
 
 </body>
