@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jeff Cady — UESCA Certified Ultrarunning Coach</title>
+<meta name="description" content="UESCA certified ultrarunning coach based in Goodyear, AZ. Training plans built like a risk assessment — find what could derail your race, then build the safeguards before it does.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#DEDACB;
+    --paper-2:#F1EEE1;
+    --ink:#232922;
+    --ink-soft:#565f4e;
+    --pine:#1B2A1F;
+    --pine-2:#25372A;
+    --line:#A79C82;
+    --line-soft:#c9c0a7;
+    --accent:#CB5A28;
+    --cream:#F7F2E7;
+    --dim:#c8b190;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  h1,h2,h3,.display{
+    font-family:'Big Shoulders Display', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+    font-weight:800;
+    margin:0;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:var(--pine);
+    color:var(--cream);
+    position:relative;
+    overflow:hidden;
+    padding:88px 0 64px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:var(--contour-pattern);
+    opacity:0.5;
+    pointer-events:none;
+  }
+  .hero .wrap{position:relative;z-index:1;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--dim);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--dim);display:inline-block;}
+  .hero h1{
+    font-size:clamp(52px, 11vw, 96px);
+    line-height:0.9;
+    color:var(--cream);
+  }
+  .hero h1 em{font-style:normal;color:var(--accent);}
+  .hero p.lead{
+    font-family:'Source Serif 4', serif;
+    font-size:19px;
+    color:#d9d2c0;
+    max-width:52ch;
+    margin-top:24px;
+  }
+  .hero-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:var(--dim);
+    margin-top:18px;
+    letter-spacing:0.03em;
+  }
+  .btn-row{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--accent);color:#fff;border:none;
+    padding:15px 26px;font-size:13.5px;letter-spacing:0.06em;text-transform:uppercase;
+    border-radius:var(--radius);text-decoration:none;
+    font-family:'IBM Plex Mono', monospace;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .btn:hover{background:#b04b1f;}
+  .btn:active{transform:translateY(1px);}
+  .btn.ghost{background:transparent;border:1px solid rgba(247,242,231,0.4);color:var(--cream);}
+  .btn.ghost:hover{background:rgba(255,255,255,0.08);}
+  .btn.dark{background:transparent;border:1px solid var(--line);color:var(--ink);}
+  .btn.dark:hover{background:rgba(0,0,0,0.05);}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line-soft);}
+  .section-title{font-size:clamp(26px,4vw,34px);margin-bottom:10px;}
+  .section-sub{color:var(--ink-soft);font-size:16px;max-width:60ch;margin-bottom:36px;font-style:italic;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;align-items:start;}
+  .about-grid p{font-size:16.5px;margin-bottom:16px;}
+  .facts{background:var(--paper-2);border:1px solid var(--line-soft);padding:22px 24px;}
+  .facts h3{font-size:13px;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:16px;font-family:'IBM Plex Mono';text-transform:uppercase;}
+  .facts dl{margin:0;}
+  .facts dt{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);margin-top:14px;}
+  .facts dt:first-child{margin-top:0;}
+  .facts dd{margin:3px 0 0;font-size:14.5px;}
+
+  @media (max-width:700px){
+    .about-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- PHILOSOPHY / SIGNATURE ---------- */
+  .process{
+    display:flex;align-items:flex-start;justify-content:space-between;
+    margin:8px 0 44px;position:relative;
+  }
+  .process::before{
+    content:"";position:absolute;top:22px;left:11%;right:11%;height:1px;
+    background:var(--line-soft);z-index:0;
+  }
+  .process-step{
+    position:relative;z-index:1;flex:1;text-align:center;padding:0 8px;
+  }
+  .process-step .ring{width:44px;height:44px;margin:0 auto 14px;}
+  .process-step h4{
+    font-family:'Big Shoulders Display';font-size:16px;letter-spacing:0.04em;
+    color:var(--ink);margin-bottom:8px;
+  }
+  .process-step p{font-size:13.5px;color:var(--ink-soft);margin:0;}
+
+  .philosophy-quote{
+    border-left:3px solid var(--accent);
+    padding:4px 0 4px 22px;
+    margin:28px 0;
+    font-size:18px;
+    font-style:italic;
+    color:var(--ink);
+  }
+
+  .tool-callout{
+    background:var(--pine-2);
+    color:var(--cream);
+    padding:36px 32px;
+    border-radius:var(--radius);
+    margin-top:40px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:24px;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .tool-callout .copy{flex:1;min-width:240px;}
+  .tool-callout h3{font-size:22px;color:var(--cream);margin-bottom:8px;}
+  .tool-callout p{font-size:14.5px;color:#d9d2c0;margin:0;}
+
+  /* ---------- WHO I COACH ---------- */
+  .coach-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+  .coach-tags span{
+    font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;
+    border:1px solid var(--line);padding:6px 14px;border-radius:20px;color:var(--ink-soft);
+  }
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  footer{
+    background:var(--pine);color:var(--dim);
+    padding:56px 0 32px;
+  }
+  footer .wrap{position:relative;}
+  footer h2{color:var(--cream);font-size:28px;margin-bottom:12px;}
+  footer p.lead-f{color:#d9d2c0;font-size:15.5px;max-width:50ch;margin-bottom:32px;}
+  .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:44px;}
+  .social-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:8px;}
+  .social-links a{
+    font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:0.04em;
+    color:var(--dim);text-decoration:none;border-bottom:1px solid rgba(200,177,144,0.35);
+    padding-bottom:2px;
+  }
+  .social-links a:hover{color:var(--accent);border-color:var(--accent);}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);
+    margin-top:36px;padding-top:22px;
+    font-family:'IBM Plex Mono';font-size:11px;color:#a99b7d;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  @media (max-width:640px){
+    .process{flex-direction:column;gap:28px;}
+    .process::before{display:none;}
+    .tool-callout{flex-direction:column;align-items:flex-start;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">UESCA Certified Ultrarunning Coach</div>
+    <h1>Jeff<br><em>Cady</em></h1>
+    <p class="lead">Training plans built like a risk assessment — find what could actually derail your race, prioritize it, and build the safeguards before it becomes a race-day failure.</p>
+    <div class="hero-meta">Goodyear, AZ &middot; Coaching beginner &amp; intermediate ultrarunners</div>
+    <div class="btn-row">
+      <a class="btn" href="#contact">Get in Touch &rarr;</a>
+      <a class="btn ghost" href="https://uera.jcady.org">Try the Free Readiness Check &rarr;</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="about">
+    <div class="wrap">
+      <h2 class="section-title">About</h2>
+      <p class="section-sub">Nearly thirty years of coaching, a decade in cybersecurity leadership, and a home base where heat isn't optional.</p>
+
+      <div class="about-grid">
+        <div>
+          <p>My coaching career didn't start with ultrarunning. Nearly thirty years ago, I coached children and Special Olympics athletes — and that's where I learned the lesson everything else is built on: no two people move through the world the same way. The same drill landed differently in every athlete I worked with. Some needed a different cue for the same movement, some needed more time, some needed the whole plan rebuilt around a body that didn't move the way a textbook assumed it would. A flat, one-size-fits-all plan never held up across a group like that, and it doesn't hold up across ultrarunners either. Every plan I build starts from who's actually in front of me.</p>
+          <p>I spent over a decade in cybersecurity leadership before earning my UESCA Ultrarunning Coach certification. That background shapes how I coach: I build training plans the way I'd build a security program — assess the real risk, prioritize what matters, and adjust as conditions change.</p>
+          <p>I'm based in Goodyear, Arizona, which means heat isn't a training variable I read about — it's the default. Summer runs here start before dawn to beat triple-digit heat, and racing in the desert Southwest means heat management is never theoretical. That's shaped how seriously I take heat acclimation, hydration strategy, and teaching athletes to recognize their own warning signs before a hot day turns into a real problem. I'm active in the Phoenix trail running community with ties to the Aravaipa race circuit, and I train on the same desert trails I coach on.</p>
+        </div>
+        <div class="facts">
+          <h3>Quick Facts</h3>
+          <dl>
+            <dt>Based In</dt>
+            <dd>Goodyear, Arizona</dd>
+            <dt>Credential</dt>
+            <dd>UESCA Certified Ultrarunning Coach</dd>
+            <dt>Coaching Since</dt>
+            <dd>1&ndash;3 years (ultrarunning) &mdash; nearly 30 years coaching overall, starting with youth &amp; Special Olympics athletes</dd>
+            <dt>Background</dt>
+            <dd>10+ years in cybersecurity leadership</dd>
+            <dt>Home Turf</dt>
+            <dd>Goodyear/Phoenix desert heat, training and racing through it firsthand</dd>
+            <dt>Community</dt>
+            <dd>Phoenix trail running scene, Aravaipa race circuit</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="philosophy">
+    <div class="wrap">
+      <h2 class="section-title">Coaching Philosophy</h2>
+      <p class="section-sub">The same discipline I used assessing threats professionally, applied to getting you to the finish line healthy.</p>
+
+      <div class="process">
+        <div class="process-step">
+          <svg class="ring" viewBox="0 0 44 44" fill="none">
+            <circle cx="22" cy="22" r="20" stroke="#CB5A28" stroke-width="1" opacity="0.35"/>
+            <circle cx="22" cy="22" r="13.5" stroke="#CB5A28" stroke-width="1" opacity="0.6"/>
+            <circle cx="22" cy="22" r="7" stroke="#CB5A28" stroke-width="1.4"/>
+            <circle cx="22" cy="22" r="2.5" fill="#CB5A28"/>
+          </svg>
+          <h4>Assess</h4>
+          <p>Identify what could actually derail your race — overtraining, poor fueling, weak mental prep, an untested gear setup.</p>
+        </div>
+        <div class="process-step">
+          <svg class="ring" viewBox="0 0 44 44" fill="none">
+            <circle cx="22" cy="22" r="20" stroke="#B2812A" stroke-width="1" opacity="0.35"/>
+            <circle cx="22" cy="22" r="13.5" stroke="#B2812A" stroke-width="1" opacity="0.6"/>
+            <circle cx="22" cy="22" r="7" stroke="#B2812A" stroke-width="1.4"/>
+            <circle cx="22" cy="22" r="2.5" fill="#B2812A"/>
+          </svg>
+          <h4>Prioritize</h4>
+          <p>Build the training block around your real risk factors and your actual life — not a flat, cookie-cutter plan.</p>
+        </div>
+        <div class="process-step">
+          <svg class="ring" viewBox="0 0 44 44" fill="none">
+            <circle cx="22" cy="22" r="20" stroke="#4B7A4E" stroke-width="1" opacity="0.35"/>
+            <circle cx="22" cy="22" r="13.5" stroke="#4B7A4E" stroke-width="1" opacity="0.6"/>
+            <circle cx="22" cy="22" r="7" stroke="#4B7A4E" stroke-width="1.4"/>
+            <circle cx="22" cy="22" r="2.5" fill="#4B7A4E"/>
+          </svg>
+          <h4>Adjust</h4>
+          <p>Reassess as conditions change — the same way a live risk program never stays static.</p>
+        </div>
+      </div>
+
+      <p>That belief traces back to the lesson I learned coaching Special Olympics athletes decades ago: no flat, cookie-cutter plan holds up across different bodies, schedules, and goals — every runner needs a plan built around who they actually are.</p>
+
+      <p class="philosophy-quote">Every training block starts by identifying what could actually derail your race, and building safeguards before those risks become race-day failures.</p>
+
+      <p>Communication matters — as a professional speaker, I make sure you understand the why, not just the workout.</p>
+
+      <div class="tool-callout">
+        <div class="copy">
+          <h3>See this framework in action</h3>
+          <p>I built a free tool that runs the same assess-prioritize-adjust process on your own race prep — the Ultra Event Readiness &amp; Risk Assessment. Ten checkpoints, a full remediation plan, and a printable PDF report.</p>
+        </div>
+        <a class="btn" href="https://uera.jcady.org">Try It Free &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="coaching">
+    <div class="wrap">
+      <h2 class="section-title">Who I Coach</h2>
+      <p class="section-sub">Right now, I work with beginner and intermediate ultrarunners.</p>
+      <div class="coach-tags">
+        <span>Ultrarunning</span>
+        <span>Beginner</span>
+        <span>Intermediate</span>
+        <span>First 50K&ndash;100K</span>
+        <span>Coming Back From a DNF</span>
+      </div>
+      <p>Whether this is your first ultra or you've been humbled by one before, I get it — and if you're racing anywhere hot, that's exactly the kind of risk I spend the most time on. If you want a coach who treats your training block like a risk assessment built around you, not a template, get in touch below.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Get In Touch</h2>
+    <p class="lead-f">Based in Goodyear, AZ. Reach out by phone or find me on social media below.</p>
+
+    <div class="contact-row">
+      <a class="btn dark" href="tel:2068497494" style="color:#F7F2E7;border-color:rgba(247,242,231,0.4);">Call (206) 849-7494</a>
+    </div>
+
+    <div class="social-links">
+      <a href="https://www.instagram.com/jeffreycady/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/jeffrey.cady" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.linkedin.com/in/jeffreycady/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 Jeffrey Cady. All rights reserved.</span>
+      <span>UESCA Certified Ultrarunning Coach &middot; Goodyear, AZ</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const contourSVG = `
+  <svg xmlns='http://www.w3.org/2000/svg' width='240' height='160'>
+    <g fill='none' stroke='%23c8b190' stroke-width='1'>
+      <path d='M-20 20 Q 40 0, 90 20 T 200 15 T 300 25'/>
+      <path d='M-20 46 Q 40 26, 90 46 T 200 41 T 300 51'/>
+      <path d='M-20 74 Q 40 54, 90 74 T 200 69 T 300 79'/>
+      <path d='M-20 102 Q 40 82, 90 102 T 200 97 T 300 107'/>
+      <path d='M-20 130 Q 40 110, 90 130 T 200 125 T 300 135'/>
+    </g>
+  </svg>`;
+  document.documentElement.style.setProperty('--contour-pattern', `url("data:image/svg+xml,${encodeURIComponent(contourSVG)}")`);
+</script>
+
+</body>
+</html>
