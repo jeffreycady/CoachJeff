@@ -8,84 +8,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 <style>
-  :root{
-    --paper:#DEDACB;
-    --paper-2:#F1EEE1;
-    --ink:#232922;
-    --ink-soft:#565f4e;
-    --pine:#1B2A1F;
-    --pine-2:#25372A;
-    --line:#A79C82;
-    --line-soft:#c9c0a7;
-    --accent:#CB5A28;
-    --cream:#F7F2E7;
-    --dim:#c8b190;
-    --radius:2px;
-  }
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Source Serif 4', Georgia, serif;
-    -webkit-font-smoothing:antialiased;
-    line-height:1.6;
-  }
-  h1,h2,h3,.display{
-    font-family:'Big Shoulders Display', sans-serif;
-    text-transform:uppercase;
-    letter-spacing:0.02em;
-    font-weight:800;
-    margin:0;
-  }
-  .mono{font-family:'IBM Plex Mono', monospace;}
-  a{color:inherit;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  /* Page-specific styles only — shared tokens, resets, type,
+     layout shell, hero mechanism, and buttons live in theme.css */
 
-  /* ---------- HERO ---------- */
-  .hero{
-    background:var(--pine);
-    color:var(--cream);
-    position:relative;
-    overflow:hidden;
-    padding:88px 0 64px;
-  }
-  .hero::before{
-    content:"";
-    position:absolute;inset:0;
-    background-image:var(--contour-pattern);
-    opacity:0.5;
-    pointer-events:none;
-  }
-  .hero .wrap{position:relative;z-index:1;}
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    letter-spacing:0.16em;
-    text-transform:uppercase;
-    color:var(--dim);
-    margin-bottom:20px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow::before{content:"";width:26px;height:1px;background:var(--dim);display:inline-block;}
-  .hero h1{
-    font-size:clamp(52px, 11vw, 96px);
-    line-height:0.9;
-    color:var(--cream);
-  }
-  .hero h1 em{font-style:normal;color:var(--accent);}
-  .hero p.lead{
-    font-family:'Source Serif 4', serif;
-    font-size:19px;
-    color:#d9d2c0;
-    max-width:52ch;
-    margin-top:24px;
-  }
+  /* This page's name is two short words, so it can run bigger
+     than the theme's default hero heading size. */
+  .hero{padding:88px 0 64px;}
+  .hero h1{font-size:clamp(52px, 11vw, 96px); line-height:0.9;}
+
   .hero-meta{
     font-family:'IBM Plex Mono', monospace;
     font-size:12.5px;
@@ -93,32 +26,10 @@
     margin-top:18px;
     letter-spacing:0.03em;
   }
-  .btn-row{display:flex;gap:14px;margin-top:38px;flex-wrap:wrap;}
-  .btn{
-    display:inline-flex;align-items:center;gap:10px;
-    background:var(--accent);color:#fff;border:none;
-    padding:15px 26px;font-size:13.5px;letter-spacing:0.06em;text-transform:uppercase;
-    border-radius:var(--radius);text-decoration:none;
-    font-family:'IBM Plex Mono', monospace;
-    transition:background .15s ease, transform .15s ease;
-  }
-  .btn:hover{background:#b04b1f;}
-  .btn:active{transform:translateY(1px);}
-  .btn.ghost{background:transparent;border:1px solid rgba(247,242,231,0.4);color:var(--cream);}
-  .btn.ghost:hover{background:rgba(255,255,255,0.08);}
-  .btn.dark{background:transparent;border:1px solid var(--line);color:var(--ink);}
-  .btn.dark:hover{background:rgba(0,0,0,0.05);}
-
-  /* ---------- SECTIONS ---------- */
-  section{padding:64px 0;}
-  section + section{border-top:1px solid var(--line-soft);}
-  .section-title{font-size:clamp(26px,4vw,34px);margin-bottom:10px;}
-  .section-sub{color:var(--ink-soft);font-size:16px;max-width:60ch;margin-bottom:36px;font-style:italic;}
 
   /* ---------- ABOUT ---------- */
   .about-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;align-items:start;}
   .about-grid p{font-size:16.5px;margin-bottom:16px;}
-  .facts{background:var(--paper-2);border:1px solid var(--line-soft);padding:22px 24px;}
   .facts h3{font-size:13px;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:16px;font-family:'IBM Plex Mono';text-transform:uppercase;}
   .facts dl{margin:0;}
   .facts dt{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);margin-top:14px;}
@@ -173,21 +84,7 @@
   .tool-callout h3{font-size:22px;color:var(--cream);margin-bottom:8px;}
   .tool-callout p{font-size:14.5px;color:#d9d2c0;margin:0;}
 
-  /* ---------- WHO I COACH ---------- */
-  .coach-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
-  .coach-tags span{
-    font-family:'IBM Plex Mono';font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;
-    border:1px solid var(--line);padding:6px 14px;border-radius:20px;color:var(--ink-soft);
-  }
-
-  /* ---------- FOOTER / CONTACT ---------- */
-  footer{
-    background:var(--pine);color:var(--dim);
-    padding:56px 0 32px;
-  }
-  footer .wrap{position:relative;}
-  footer h2{color:var(--cream);font-size:28px;margin-bottom:12px;}
-  footer p.lead-f{color:#d9d2c0;font-size:15.5px;max-width:50ch;margin-bottom:32px;}
+  /* ---------- FOOTER / CONTACT (page-specific parts) ---------- */
   .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px;}
   .social-links{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
   .social-links a{
@@ -202,12 +99,6 @@
   }
   .phone-line a{color:var(--dim);text-decoration:underline;text-decoration-color:rgba(200,177,144,0.4);}
   .phone-line a:hover{color:var(--accent);text-decoration-color:var(--accent);}
-  .footer-bottom{
-    border-top:1px solid rgba(255,255,255,0.12);
-    margin-top:36px;padding-top:22px;
-    font-family:'IBM Plex Mono';font-size:11px;color:#a99b7d;
-    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
-  }
 
   @media (max-width:640px){
     .process{flex-direction:column;gap:28px;}
@@ -244,7 +135,7 @@
           <p>I spent over a decade in cybersecurity leadership before earning my UESCA Ultrarunning Coach certification. That background shapes how I coach: I build training plans the way I'd build a security program — assess the real risk, prioritize what matters, and adjust as conditions change.</p>
           <p>I'm based in Goodyear, Arizona, which means heat isn't a training variable I read about — it's the default. Summer runs here start before dawn to beat triple-digit heat, and racing in the desert Southwest means heat management is never theoretical. That's shaped how seriously I take heat acclimation, hydration strategy, and teaching athletes to recognize their own warning signs before a hot day turns into a real problem. I'm active in the Phoenix trail running community with ties to the Aravaipa race circuit, and I train on the same desert trails I coach on.</p>
         </div>
-        <div class="facts">
+        <div class="facts card">
           <h3>Quick Facts</h3>
           <dl>
             <dt>Based In</dt>
@@ -272,32 +163,17 @@
 
       <div class="process">
         <div class="process-step">
-          <svg class="ring" viewBox="0 0 44 44" fill="none">
-            <circle cx="22" cy="22" r="20" stroke="#CB5A28" stroke-width="1" opacity="0.35"/>
-            <circle cx="22" cy="22" r="13.5" stroke="#CB5A28" stroke-width="1" opacity="0.6"/>
-            <circle cx="22" cy="22" r="7" stroke="#CB5A28" stroke-width="1.4"/>
-            <circle cx="22" cy="22" r="2.5" fill="#CB5A28"/>
-          </svg>
+          <div class="ring" data-ring="#CB5A28"></div>
           <h4>Assess</h4>
           <p>Identify what could actually derail your race — overtraining, poor fueling, weak mental prep, an untested gear setup.</p>
         </div>
         <div class="process-step">
-          <svg class="ring" viewBox="0 0 44 44" fill="none">
-            <circle cx="22" cy="22" r="20" stroke="#B2812A" stroke-width="1" opacity="0.35"/>
-            <circle cx="22" cy="22" r="13.5" stroke="#B2812A" stroke-width="1" opacity="0.6"/>
-            <circle cx="22" cy="22" r="7" stroke="#B2812A" stroke-width="1.4"/>
-            <circle cx="22" cy="22" r="2.5" fill="#B2812A"/>
-          </svg>
+          <div class="ring" data-ring="#B2812A"></div>
           <h4>Prioritize</h4>
           <p>Build the training block around your real risk factors and your actual life — not a flat, cookie-cutter plan.</p>
         </div>
         <div class="process-step">
-          <svg class="ring" viewBox="0 0 44 44" fill="none">
-            <circle cx="22" cy="22" r="20" stroke="#4B7A4E" stroke-width="1" opacity="0.35"/>
-            <circle cx="22" cy="22" r="13.5" stroke="#4B7A4E" stroke-width="1" opacity="0.6"/>
-            <circle cx="22" cy="22" r="7" stroke="#4B7A4E" stroke-width="1.4"/>
-            <circle cx="22" cy="22" r="2.5" fill="#4B7A4E"/>
-          </svg>
+          <div class="ring" data-ring="#4B7A4E"></div>
           <h4>Adjust</h4>
           <p>Reassess as conditions change — the same way a live risk program never stays static.</p>
         </div>
@@ -323,7 +199,7 @@
     <div class="wrap">
       <h2 class="section-title">Who I Coach</h2>
       <p class="section-sub">Right now, I work with beginner and intermediate ultrarunners.</p>
-      <div class="coach-tags">
+      <div class="pill-row" style="margin-bottom:28px;">
         <span>Ultrarunning</span>
         <span>Beginner</span>
         <span>Intermediate</span>
@@ -336,7 +212,7 @@
 
 </main>
 
-<footer id="contact">
+<footer id="contact" class="site-footer-full">
   <div class="wrap">
     <h2>Get In Touch</h2>
     <p class="lead-f">Based in Goodyear, AZ. Email me directly, or find me on social media below.</p>
@@ -361,17 +237,9 @@
 </footer>
 
 <script>
-  const contourSVG = `
-  <svg xmlns='http://www.w3.org/2000/svg' width='240' height='160'>
-    <g fill='none' stroke='%23c8b190' stroke-width='1'>
-      <path d='M-20 20 Q 40 0, 90 20 T 200 15 T 300 25'/>
-      <path d='M-20 46 Q 40 26, 90 46 T 200 41 T 300 51'/>
-      <path d='M-20 74 Q 40 54, 90 74 T 200 69 T 300 79'/>
-      <path d='M-20 102 Q 40 82, 90 102 T 200 97 T 300 107'/>
-      <path d='M-20 130 Q 40 110, 90 130 T 200 125 T 300 135'/>
-    </g>
-  </svg>`;
-  document.documentElement.style.setProperty('--contour-pattern', `url("data:image/svg+xml,${encodeURIComponent(contourSVG)}")`);
+  document.querySelectorAll('.ring[data-ring]').forEach(el=>{
+    el.innerHTML = waypointIcon(el.dataset.ring, 44);
+  });
 </script>
 
 </body>
