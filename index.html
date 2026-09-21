@@ -3,412 +3,225 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jeff Cady — UESCA Certified Ultrarunning Coach</title>
-<meta name="description" content="UESCA certified ultrarunning coach based in Goodyear, AZ. Training plans built like a risk assessment — find what could derail your race, then build the safeguards before it does.">
+<title>The UERA Framework &mdash; Logic, Scoring &amp; Sources | Jeff Cady</title>
+<meta name="description" content="How the Ultra Event Readiness &amp; Risk Assessment actually works: the scoring math, why the checkpoints differ by discipline, and the real sources behind every question.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 <script src="theme.js"></script>
 <style>
-  /* Page-specific styles only — shared tokens, resets, type,
-     layout shell, hero mechanism, and buttons live in theme.css */
-
-  /* This page's name is two short words, so it can run bigger
-     than the theme's default hero heading size. */
-  .hero{
-    padding:88px 0 64px;
-    background-image:
-      linear-gradient(120deg, rgba(27,42,31,0.93) 0%, rgba(27,42,31,0.82) 45%, rgba(27,42,31,0.58) 100%),
-      url('hero-photo.jpg');
-    background-size:cover;
-    background-position:62% 30%;
-  }
-  .hero::before{display:none;}
-  .hero h1{font-size:clamp(52px, 11vw, 96px); line-height:0.9;}
-
-  .hero-meta{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:12.5px;
-    color:var(--dim);
-    margin-top:18px;
-    letter-spacing:0.03em;
-  }
-
-  /* ---------- ABOUT ---------- */
-  .about-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:48px;align-items:start;}
-  .about-grid p{font-size:16.5px;margin-bottom:16px;}
-  .facts h3{font-size:13px;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:16px;font-family:'IBM Plex Mono';text-transform:uppercase;}
-  .facts dl{margin:0;}
-  .facts dt{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);margin-top:14px;}
-  .facts dt:first-child{margin-top:0;}
-  .facts dd{margin:3px 0 0;font-size:14.5px;}
-  .facts dd a, #about > .wrap > .about-grid > div > p a{
-    color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);
-  }
-  .facts dd a:hover, #about > .wrap > .about-grid > div > p a:hover{text-decoration-color:var(--accent);}
-
-  @media (max-width:700px){
-    .about-grid{grid-template-columns:1fr;}
-  }
-
-  /* ---------- PHILOSOPHY / SIGNATURE ---------- */
-  .process{
-    display:flex;align-items:flex-start;justify-content:space-between;
-    margin:8px 0 44px;position:relative;
-  }
-  .process::before{
-    content:"";position:absolute;top:22px;left:11%;right:11%;height:1px;
-    background:var(--line-soft);z-index:0;
-  }
-  .process-step{
-    position:relative;z-index:1;flex:1;text-align:center;padding:0 8px;
-  }
-  .process-step .ring{width:44px;height:44px;margin:0 auto 14px;}
-  .process-step h4{
-    font-family:'Big Shoulders Display';font-size:16px;letter-spacing:0.04em;
-    color:var(--ink);margin-bottom:8px;
-  }
-  .process-step p{font-size:13.5px;color:var(--ink-soft);margin:0;}
-
-  .philosophy-quote{
-    border-left:3px solid var(--accent);
-    padding:4px 0 4px 22px;
-    margin:28px 0;
-    font-size:18px;
-    font-style:italic;
-    color:var(--ink);
-  }
-
-  .tool-callout{
-    background:var(--pine-2);
+  .fw-hero{
+    background:var(--pine);
     color:var(--cream);
-    padding:36px 32px;
-    border-radius:var(--radius);
-    margin-top:40px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:24px;
-    align-items:center;
-    justify-content:space-between;
+    padding:72px 0 56px;
+    position:relative;
+    overflow:hidden;
   }
-  .tool-callout .copy{flex:1;min-width:240px;}
-  .tool-callout h3{font-size:22px;color:var(--cream);margin-bottom:8px;}
-  .tool-callout p{font-size:14.5px;color:#d9d2c0;margin:0;}
-  .tool-callout p a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
-  .tool-callout p a:hover{text-decoration-color:var(--accent);}
-
-  /* ---------- FOOTER / CONTACT (page-specific parts) ---------- */
-  .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px;}
-  .social-links{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
-  .social-links a{
-    font-family:'IBM Plex Mono';font-size:12.5px;letter-spacing:0.05em;text-transform:uppercase;
-    color:var(--cream);text-decoration:none;
-    border:1px solid rgba(247,242,231,0.32);padding:11px 20px;border-radius:22px;
-    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  .fw-hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background-image:var(--contour-pattern);
+    background-size:600px;
+    opacity:0.08;
+    pointer-events:none;
   }
-  .social-links a:hover{border-color:var(--accent);color:var(--accent);background:rgba(203,90,40,0.1);}
-  .phone-line{
-    font-family:'IBM Plex Mono';font-size:12.5px;color:var(--dim);margin-bottom:20px;
+  .fw-hero .wrap{position:relative;}
+  .fw-back{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#c8b190;
+    text-decoration:none;margin-bottom:28px;
   }
-  .phone-line a{color:var(--dim);text-decoration:underline;text-decoration-color:rgba(200,177,144,0.4);}
-  .phone-line a:hover{color:var(--accent);text-decoration-color:var(--accent);}
-
-  /* ---------- INQUIRY FORM ---------- */
-  .inquiry-form{
-    display:grid;grid-template-columns:1fr 1fr;gap:18px;
-    max-width:560px;margin-bottom:36px;
+  .fw-back:hover{color:var(--accent);}
+  .fw-hero h1{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:800;
+    font-size:clamp(38px,6vw,64px);
+    line-height:0.98;
+    margin-bottom:18px;
+    max-width:14ch;
   }
-  .inquiry-form .field:nth-child(3),
-  .inquiry-form .field:nth-child(4){grid-column:1 / -1;}
-  .inquiry-form button{grid-column:1 / -1;justify-self:start;margin-top:4px;}
-  .form-status{
-    background:rgba(75,122,78,0.18);border:1px solid var(--low);color:var(--cream);
-    padding:14px 18px;margin-bottom:24px;max-width:560px;
-    font-family:'IBM Plex Mono', monospace;font-size:13px;
+  .fw-hero .lede{
+    font-size:17px;color:#d9d2c0;max-width:58ch;line-height:1.6;
   }
-  @media (max-width:560px){
-    .inquiry-form{grid-template-columns:1fr;}
-    .inquiry-form .field:nth-child(3), .inquiry-form .field:nth-child(4){grid-column:auto;}
+  .fw-section{padding:56px 0;border-bottom:1px solid var(--line);}
+  .fw-section:last-of-type{border-bottom:none;}
+  .fw-section .wrap{max-width:760px;}
+  .fw-section h2{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:700;font-size:clamp(26px,4vw,34px);
+    margin-bottom:6px;
   }
-
-  /* ---------- COACHING PACKAGES ---------- */
-  .packages-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
-    background:var(--line-soft);border:1px solid var(--line-soft);
+  .fw-kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);
+    margin-bottom:10px;
   }
-  .package-card{
-    background:var(--paper-2);padding:34px 26px;
-    display:flex;flex-direction:column;
+  .fw-section p{font-size:16px;line-height:1.7;color:var(--ink);margin-bottom:16px;max-width:68ch;}
+  .fw-section p a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
+  .fw-section p a:hover{text-decoration-color:var(--accent);}
+  .fw-section p:last-child{margin-bottom:0;}
+  .checkpoint-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px;
   }
-  .package-name{
-    font-family:'Big Shoulders Display';font-size:15px;letter-spacing:0.12em;
-    text-transform:uppercase;color:var(--ink-soft);margin-bottom:14px;
+  @media (max-width:640px){.checkpoint-grid{grid-template-columns:1fr;}}
+  .checkpoint-grid .cp{
+    border:1px solid var(--line);padding:16px 18px;background:var(--paper-2);
   }
-  .package-price{
-    font-family:'Big Shoulders Display';font-size:46px;color:var(--ink);
-    line-height:1;margin-bottom:6px;
+  .checkpoint-grid .cp .num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
   }
-  .package-price span{
-    font-size:15px;font-family:'IBM Plex Mono', monospace;text-transform:none;
-    letter-spacing:0;color:var(--ink-soft);
+  .checkpoint-grid .cp h4{
+    font-family:'Big Shoulders Display',sans-serif;font-size:18px;font-weight:700;
+    margin:4px 0 6px;
   }
-  .package-startup{
-    font-family:'IBM Plex Mono', monospace;font-size:12px;color:var(--ink-soft);
-    margin-bottom:24px;min-height:16px;
+  .checkpoint-grid .cp p{font-size:14px;margin:0;color:var(--ink-soft);}
+  .formula-block{
+    background:var(--pine);color:var(--cream);
+    padding:22px 24px;margin:22px 0;
+    font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.9;
   }
-  .package-features{
-    list-style:none;padding:0;margin:0 0 30px;flex:1;
-    display:flex;flex-direction:column;gap:11px;
+  .formula-block .step{color:#c8b190;}
+  .formula-block .hi{color:var(--accent);}
+  .case-study{
+    border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin:24px 0;
   }
-  .package-features li{
-    font-size:14.5px;padding-left:22px;position:relative;
+  .case-study p{font-style:italic;color:var(--ink-soft);}
+  .source-list{margin-top:20px;display:flex;flex-direction:column;gap:0;}
+  .source-list .src{
+    display:flex;gap:16px;padding:13px 0;border-top:1px solid var(--line-soft);
+    font-size:14.5px;
   }
-  .package-features li::before{
-    content:"\2713";position:absolute;left:0;color:var(--accent);font-weight:600;
+  .source-list .src:first-child{border-top:none;}
+  .source-list .src .domain{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+    width:120px;flex-shrink:0;padding-top:2px;
   }
-  .package-card .btn{width:100%;justify-content:center;text-align:center;}
-
-  @media (max-width:760px){
-    .packages-grid{grid-template-columns:1fr;}
+  .source-list .src .what{color:var(--ink);}
+  .source-list .src .what span{color:var(--ink-soft);display:block;font-size:13px;margin-top:2px;}
+  .fw-cta{
+    background:var(--pine);color:var(--cream);padding:56px 0;text-align:center;
   }
-
-  @media (max-width:640px){
-    .process{flex-direction:column;gap:28px;}
-    .process::before{display:none;}
-    .tool-callout{flex-direction:column;align-items:flex-start;}
+  .fw-cta h2{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:clamp(24px,4vw,32px);
+    margin-bottom:14px;
   }
+  .fw-cta p{color:#d9d2c0;max-width:52ch;margin:0 auto 28px;font-size:15.5px;}
 </style>
 </head>
 <body>
 
-<header class="hero">
+<section class="fw-hero">
   <div class="wrap">
-    <div class="eyebrow">UESCA Certified Ultrarunning Coach</div>
-    <h1>Jeff<br><em>Cady</em></h1>
-    <p class="lead">Training plans built like a risk assessment — find what could actually derail your race, prioritize it, and build the safeguards before it becomes a race-day failure.</p>
-    <div class="hero-meta">Goodyear, AZ &middot; Coaching beginner &amp; intermediate ultrarunners</div>
-    <div class="btn-row">
-      <a class="btn" href="#contact">Get in Touch &rarr;</a>
-      <a class="btn ghost" href="https://uera.jcady.org/?coach=jeff">Try the Free Readiness Check &rarr;</a>
+    <a class="fw-back" href="index.html">&larr; Back to jcady.org</a>
+    <div class="fw-kicker">FRAMEWORK &amp; METHODOLOGY</div>
+    <h1>How the UERA framework actually works</h1>
+    <p class="lede">The Ultra Event Readiness &amp; Risk Assessment isn't a quiz with a vibe-based score. Every checkpoint, every question, and every scoring rule was built for a specific reason. This is that reasoning, laid out plainly &mdash; written and maintained by me, Jeff Cady, the person who built it.</p>
+    <a class="btn" href="questions.html" style="margin-top:28px;display:inline-block;">Browse Every Question &amp; Source &rarr;</a>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">WHY IT EXISTS</div>
+    <h2>Assess. Prioritize. Adjust.</h2>
+    <p>UERA runs the same three-step process I use as a coach, and the same one I used for over a decade in cybersecurity risk assessment: figure out where the real risk actually is, rank it by what would hurt most, then build a concrete plan to close the gap &mdash; instead of a generic checklist that treats a taper-week reminder and a life-threatening gap with the same weight.</p>
+    <p>Most pre-race checklists are really just packing lists. UERA is built around a different question: <em>if something goes wrong out there, what's the actual chain of events that gets you there, and did you already close that door?</em> That's a risk-assessment framing, not a checklist framing, and it changes what gets asked and how it gets scored.</p>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">THE STRUCTURE</div>
+    <h2>Ten checkpoints, not one score</h2>
+    <p>A single overall number hides where the actual problem is. UERA scores ten separate checkpoints independently, then averages them &mdash; so "72% ready" always comes with a specific answer to "ready for what, and weak where."</p>
+    <div class="checkpoint-grid">
+      <div class="cp"><div class="num">01</div><h4>Terrain &amp; Route Profile</h4><p>Does your training terrain actually match what's ahead?</p></div>
+      <div class="cp"><div class="num">02</div><h4>Environment &amp; Climate</h4><p>Heat, altitude, cold &mdash; acclimation takes weeks, not days.</p></div>
+      <div class="cp"><div class="num">03</div><h4>Gear &amp; Tools</h4><p>Tested and matched to your actual discipline, not generic.</p></div>
+      <div class="cp"><div class="num">04</div><h4>Nutrition &amp; Hydration</h4><p>A race-day fueling plan is a rehearsed skill, not an assumption.</p></div>
+      <div class="cp"><div class="num">05</div><h4>Training &amp; Fitness Readiness</h4><p>Phase-aware: what matters 6&ndash;12 weeks out differs from taper week.</p></div>
+      <div class="cp"><div class="num">06</div><h4>Medical &amp; Injury History</h4><p>Unresolved issues and undisclosed conditions are where bad days start.</p></div>
+      <div class="cp"><div class="num">07</div><h4>Safety &amp; Emergency Preparedness</h4><p>Does anyone know your plan if it goes wrong?</p></div>
+      <div class="cp"><div class="num">08</div><h4>Event Logistics &amp; Support</h4><p>Crew, cutoffs, drop bags &mdash; the machinery around the miles.</p></div>
+      <div class="cp"><div class="num">09</div><h4>Mental Readiness &amp; Pacing</h4><p>A plan for the low points, decided before you're in one.</p></div>
+      <div class="cp"><div class="num">10</div><h4>Recovery Plan</h4><p>What happens in the 72 hours after matters more than people plan for.</p></div>
     </div>
   </div>
-</header>
+</section>
 
-<main>
-
-  <section id="about">
-    <div class="wrap">
-      <h2 class="section-title">About</h2>
-      <p class="section-sub">Nearly thirty years of coaching, a decade in cybersecurity leadership, and a home base where heat isn't optional.</p>
-
-      <div class="about-grid">
-        <div>
-          <p>My coaching career didn't start with ultrarunning. Nearly thirty years ago, I coached children and Special Olympics athletes — and that's where I learned the lesson everything else is built on: no two people move through the world the same way. The same drill landed differently in every athlete I worked with. Some needed a different cue for the same movement, some needed more time, some needed the whole plan rebuilt around a body that didn't move the way a textbook assumed it would. A flat, one-size-fits-all plan never held up across a group like that, and it doesn't hold up across ultrarunners either. Every plan I build starts from who's actually in front of me.</p>
-          <p>I spent over a decade in cybersecurity leadership before earning my UESCA Ultrarunning Coach certification. That background shapes how I coach: I build training plans the way I'd build a security program — assess the real risk, prioritize what matters, and adjust as conditions change. That same process is what I built the <a href="https://uera.jcady.org/?coach=jeff">Ultra Event Readiness &amp; Risk Assessment</a> around — a free framework now used across ultrarunning, mountaineering, skimo, and long-distance hiking. <a href="framework.html">Here's the logic and science behind how it actually works.</a></p>
-          <p>I'm based in Goodyear, Arizona, which means heat isn't a training variable I read about — it's the default. Summer runs here start before dawn to beat triple-digit heat (100°F+ / 38°C+), and racing in the desert Southwest means heat management is never theoretical. That's shaped how seriously I take heat acclimation, hydration strategy, and teaching athletes to recognize their own warning signs before a hot day turns into a real problem. I'm active in the Phoenix trail running community with ties to the Aravaipa race circuit, and I train on the same desert trails I coach on.</p>
-        </div>
-        <div class="facts card">
-          <h3>Quick Facts</h3>
-          <dl>
-            <dt>Based In</dt>
-            <dd>Goodyear, Arizona</dd>
-            <dt>Credential</dt>
-            <dd>UESCA Certified Ultrarunning Coach</dd>
-            <dt>Creator Of</dt>
-            <dd>The UERA framework — <a href="framework.html">how it works</a></dd>
-            <dt>Coaching Since</dt>
-            <dd>1&ndash;3 years (ultrarunning) &mdash; nearly 30 years coaching overall, starting with youth &amp; Special Olympics athletes</dd>
-            <dt>Background</dt>
-            <dd>10+ years in cybersecurity leadership</dd>
-            <dt>Home Turf</dt>
-            <dd>Goodyear/Phoenix desert heat, training and racing through it firsthand</dd>
-            <dt>Community</dt>
-            <dd>Phoenix trail running scene, Aravaipa race circuit</dd>
-          </dl>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="philosophy">
-    <div class="wrap">
-      <h2 class="section-title">Coaching Philosophy</h2>
-      <p class="section-sub">The same discipline I used assessing threats professionally, applied to getting you to the finish line healthy.</p>
-
-      <div class="process">
-        <div class="process-step">
-          <div class="ring" data-ring="#CB5A28"></div>
-          <h4>Assess</h4>
-          <p>Identify what could actually derail your race — overtraining, poor fueling, weak mental prep, an untested gear setup.</p>
-        </div>
-        <div class="process-step">
-          <div class="ring" data-ring="#B2812A"></div>
-          <h4>Prioritize</h4>
-          <p>Build the training block around your real risk factors and your actual life — not a flat, cookie-cutter plan.</p>
-        </div>
-        <div class="process-step">
-          <div class="ring" data-ring="#4B7A4E"></div>
-          <h4>Adjust</h4>
-          <p>Reassess as conditions change — the same way a live risk program never stays static.</p>
-        </div>
-      </div>
-
-      <p>That belief traces back to the lesson I learned coaching Special Olympics athletes decades ago: no flat, cookie-cutter plan holds up across different bodies, schedules, and goals — every runner needs a plan built around who they actually are.</p>
-
-      <p class="philosophy-quote">Every training block starts by identifying what could actually derail your race, and building safeguards before those risks become race-day failures.</p>
-
-      <p>Communication matters — as a professional speaker, I make sure you understand the why, not just the workout.</p>
-
-      <div class="tool-callout">
-        <div class="copy">
-          <h3>See this framework in action</h3>
-          <p>I built a free tool that runs the same assess-prioritize-adjust process on your own race prep — the Ultra Event Readiness &amp; Risk Assessment. Ten checkpoints, a full remediation plan, and a printable PDF report. <a href="framework.html">Read how the scoring and sourcing actually work &rarr;</a></p>
-        </div>
-        <a class="btn" href="https://uera.jcady.org/?coach=jeff">Try It Free &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="coaching">
-    <div class="wrap">
-      <h2 class="section-title">Who I Coach</h2>
-      <p class="section-sub">Right now, I work with beginner and intermediate ultrarunners.</p>
-      <div class="pill-row" style="margin-bottom:28px;">
-        <span>Ultrarunning</span>
-        <span>Beginner</span>
-        <span>Intermediate</span>
-        <span>First 50K&ndash;100K</span>
-        <span>Coming Back From a DNF</span>
-      </div>
-      <p>Whether this is your first ultra or you've been humbled by one before, I get it — and if you're racing anywhere hot, that's exactly the kind of risk I spend the most time on. If you want a coach who treats your training block like a risk assessment built around you, not a template, take a look at the packages below — or get in touch first if you've got questions.</p>
-    </div>
-  </section>
-
-  <section id="packages">
-    <div class="wrap">
-      <h2 class="section-title">Coaching Packages</h2>
-      <p class="section-sub">Ready to sign up? Pick a package below — checkout runs through TrainingPeaks, where your programming, calendar, and communication all live.</p>
-
-      <div class="packages-grid">
-        <div class="package-card">
-          <div class="package-name">Bronze</div>
-          <div class="package-price">$100<span>/mo</span></div>
-          <div class="package-startup">+ $50 one-time startup</div>
-          <ul class="package-features">
-            <li>Quarterly video calls</li>
-            <li>Weekly programming</li>
-            <li>TrainingPeaks account</li>
-            <li>Unlimited text &amp; email</li>
-          </ul>
-          <a class="btn" href="https://checkout.trainingpeaks.com/product/fa7d87b4-37cd-4fff-86c9-94c279e840ec" target="_blank" rel="noopener">Sign Up &rarr;</a>
-        </div>
-
-        <div class="package-card">
-          <div class="package-name">Silver</div>
-          <div class="package-price">$130<span>/mo</span></div>
-          <div class="package-startup">+ $25 one-time startup</div>
-          <ul class="package-features">
-            <li>Monthly video calls</li>
-            <li>Weekly programming</li>
-            <li>Premium TrainingPeaks account</li>
-            <li>Unlimited text &amp; email</li>
-          </ul>
-          <a class="btn" href="https://checkout.trainingpeaks.com/product/b3e2604d-a844-4b4e-85df-d544a446a9f3" target="_blank" rel="noopener">Sign Up &rarr;</a>
-        </div>
-
-        <div class="package-card">
-          <div class="package-name">Gold</div>
-          <div class="package-price">$180<span>/mo</span></div>
-          <div class="package-startup">No startup fee</div>
-          <ul class="package-features">
-            <li>Biweekly video calls</li>
-            <li>Weekly programming</li>
-            <li>Premium TrainingPeaks account</li>
-            <li>Unlimited text &amp; email</li>
-          </ul>
-          <a class="btn" href="https://checkout.trainingpeaks.com/product/fa2227bb-a117-439f-84ff-10e4fa1d51db" target="_blank" rel="noopener">Sign Up &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<footer id="contact" class="site-footer-full">
+<section class="fw-section">
   <div class="wrap">
-    <h2>Get In Touch</h2>
-    <p class="lead-f">Not ready to commit, or just have questions first? Tell me a bit about yourself and what you're training for, and I'll get back to you. Ready to sign up already? The packages above go straight to checkout through TrainingPeaks.</p>
-
-    <div id="formStatus" class="form-status" hidden>Thanks — that's sent. I'll get back to you soon.</div>
-
-    <form id="inquiryForm" class="inquiry-form" action="https://formspree.io/f/moeqvykw" method="POST">
-      <div class="field">
-        <label for="inq-name">Name</label>
-        <input type="text" id="inq-name" name="name" required autocomplete="name">
-      </div>
-      <div class="field">
-        <label for="inq-email">Email</label>
-        <input type="email" id="inq-email" name="email" required autocomplete="email">
-      </div>
-      <div class="field">
-        <label for="inq-goal">What are you training for?</label>
-        <input type="text" id="inq-goal" name="training_for" placeholder="e.g. first 50K, a specific 100-miler, coming back from injury">
-      </div>
-      <div class="field">
-        <label for="inq-message">Message</label>
-        <textarea id="inq-message" name="message" required placeholder="Tell me about your goals, experience, and what you're looking for in a coach."></textarea>
-      </div>
-
-      <!-- Spam trap: real visitors never fill this in; bots often do. -->
-      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-      <input type="hidden" name="_subject" value="New coaching inquiry — jcady.org">
-      <input type="hidden" name="_next" id="inq-next" value="">
-
-      <button type="submit" class="btn">Send Inquiry &rarr;</button>
-    </form>
-
-    <div class="contact-row">
-      <a class="btn ghost-dark" href="mailto:coach@jcady.org">Email coach@jcady.org</a>
+    <div class="fw-kicker">THE SCORING</div>
+    <h2>What the numbers actually mean</h2>
+    <p>Every question has a set of answers ordered from lowest risk to highest. Your answer's position in that list becomes a fraction &mdash; the best answer scores 0, the worst scores 1, and answers in between land proportionally.</p>
+    <div class="formula-block">
+      <span class="step">category_score</span> = ROUND( (sum of every question's fraction &divide; number of scored questions) &times; <span class="hi">100</span> )<br>
+      <span class="step">overall_score</span> = ROUND( average of all 10 category scores )<br><br>
+      <span class="step">tiers</span>: <span class="hi">0&ndash;33</span> Low &nbsp;|&nbsp; <span class="hi">34&ndash;66</span> Moderate &nbsp;|&nbsp; <span class="hi">67&ndash;100</span> High
     </div>
-
-    <div class="social-links">
-      <a href="https://www.instagram.com/jeffreycady/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://www.facebook.com/jeffrey.cady" target="_blank" rel="noopener">Facebook</a>
-      <a href="https://www.linkedin.com/in/jeffreycady/" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-
-    <div class="phone-line">Or call <a href="tel:2068497494">(206) 849-7494</a></div>
-
-    <div class="footer-bottom">
-      <span>&copy; 2026 Jeffrey Cady. All rights reserved.</span>
-      <span>UESCA Certified Ultrarunning Coach &middot; Goodyear, AZ</span>
-    </div>
+    <p>Two deliberate exceptions to that simple math:</p>
+    <p><strong>"Not applicable" doesn't get punished.</strong> If a question doesn't apply to your event &mdash; no overnight shelter needed, no on-course medical support to look up &mdash; selecting that option scores as 0 risk, not as a missing or wrong answer. A risk assessment shouldn't penalize you for a risk that isn't there.</p>
+    <p><strong>One question is informational only.</strong> Whether you've progressed through shorter distances before your first ultra is useful context for a coach, but the science doesn't support treating it as a risk factor &mdash; UESCA's own certification material is explicit that this isn't a prerequisite for success. So that answer is shown, but excluded entirely from the score. A framework that scores things has to be honest about what it doesn't actually know is risky.</p>
   </div>
-</footer>
+</section>
 
-<script>
-  document.querySelectorAll('.ring[data-ring]').forEach(el=>{
-    el.innerHTML = waypointIcon(el.dataset.ring, 44);
-  });
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">HOW TO ACTUALLY USE THE SCORE</div>
+    <h2>This isn't fixed in one pass</h2>
+    <p>In cybersecurity, nobody achieves "secure" and stops. You assess, you find the highest-priority gap, you close that one gap, and then you reassess &mdash; because fixing one thing can shift what the next-biggest risk actually is. A security program that never gets re-audited isn't secure, it's just untested. UERA is built to work the same way, on purpose.</p>
+    <p>Don't treat a Moderate or High score across all ten checkpoints as ten things to fix this week. Look at the Risk Skyline or the Readiness Radar, find the one checkpoint that's actually tallest or reddest, and work on just that one. Trying to fix everything at once is how people burn out two weeks into a training block and fix nothing.</p>
+    <p>Then reassess &mdash; retake the assessment and use <strong>Compare With a Previous Assessment</strong> to see, checkpoint by checkpoint, whether that specific thing actually moved. Not a feeling that you're "more ready," an actual before-and-after number. If it didn't move, that tells you something too: either the fix wasn't the right one, or it wasn't finished. Pick the next-highest checkpoint and repeat. That loop &mdash; assess, prioritize one thing, fix it, remeasure &mdash; is the whole framework, not just the scoring math.</p>
+  </div>
+</section>
 
-  // Point Formspree's redirect back at this exact page, whatever domain
-  // it ends up live on, and land on the contact section with ?sent=true.
-  const nextField = document.getElementById('inq-next');
-  if(nextField){
-    nextField.value = window.location.origin + window.location.pathname + '?sent=true#contact';
-  }
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">DISCIPLINE-AWARE, NOT GENERIC</div>
+    <h2>Built differently for every discipline</h2>
+    <p>UERA covers four disciplines &mdash; ultramarathons, mountaineering, ski mountaineering (skimo), and long-distance hiking &mdash; and most of the assessment content actually changes depending on which one you select, not just the label.</p>
+    <div class="case-study">
+      <p>Early in development, the Gear checkpoint asked every discipline the same questions: trekking poles, headlamp, shoe break-in. It worked fine for ultrarunners. For a mountaineer, it was actively wrong &mdash; nothing about ice axe competency, crampon fit, or crevasse rescue gear, the things that actually carry risk in that discipline. A mountaineer who was genuinely well-prepared would score as high-risk anyway, simply because the tool never asked about the gear that mattered to them.</p>
+    </div>
+    <p>That's now fixed across the assessment: Gear, Training, and the first-timer question sets all branch by discipline, built from each discipline's own literature rather than adapted from running. Mountaineering's training questions are grounded in Steve House and Scott Johnston's <em>Training for the New Alpinism</em> &mdash; aerobic base before intensity, loaded muscular endurance, periodized progression. Skimo's are grounded in the companion volume, <em>Training for the Uphill Athlete</em>, applied to that sport's actual weekly-hours structure. Neither is a relabeled version of the ultrarunning content.</p>
+  </div>
+</section>
 
-  // If we just got redirected back from a successful submission, show
-  // the confirmation banner and clean the URL up.
-  if(window.location.search.includes('sent=true')){
-    const status = document.getElementById('formStatus');
-    if(status) status.hidden = false;
-    const form = document.getElementById('inquiryForm');
-    if(form) form.hidden = true;
-    history.replaceState(null, '', window.location.pathname + '#contact');
-  }
-</script>
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">SOURCING</div>
+    <h2>Every answer traces to a real source</h2>
+    <p>Nothing in UERA is generic wellness advice. Every question's remediation guidance links to a specific, named source &mdash; something you can actually go read, not a made-up citation. A sample of what the framework draws on:</p>
+    <div class="source-list">
+      <div class="src"><div class="domain">UESCA</div><div class="what">Ultrarunning coach certification material<span>Minimum/maximum weekly training hours by distance; first-ultra prerequisites</span></div></div>
+      <div class="src"><div class="domain">CTS / Koop</div><div class="what">Jason Koop's published training guidance<span>Pacing strategy, tapering, the four-year ultrarunner development framework</span></div></div>
+      <div class="src"><div class="domain">Uphill Athlete</div><div class="what">Steve House &amp; Scott Johnston<span>Training for the New Alpinism; Training for the Uphill Athlete</span></div></div>
+      <div class="src"><div class="domain">Renner</div><div class="what">Jeff Renner's Mountain Weather<span>Field-reading mountain weather signs, via Washington Trails Association</span></div></div>
+      <div class="src"><div class="domain">REI</div><div class="what">REI Expert Advice<span>Crampon use, crevasse rescue skills, mountaineering layering</span></div></div>
+      <div class="src"><div class="domain">USA Skimo</div><div class="what">National ski mountaineering coaching network<span>Race format, mandatory safety gear competency</span></div></div>
+      <div class="src"><div class="domain">The Trek</div><div class="what">Zach Davis &amp; contributing thru-hike coaches<span>Long-distance hiking logistics, resupply planning, trail selection</span></div></div>
+      <div class="src"><div class="domain">Liz Thomas</div><div class="what">Independent thru-hiking guide &amp; former AT speed record holder<span>Thru-hike planning fundamentals, trip-planning discipline</span></div></div>
+    </div>
+    <p>The full list &mdash; every question, every option, every scoring rule, every link &mdash; is <a href="questions.html">browsable here</a>, loaded live from the same file that drives the tool itself. Prefer the raw data? It's also <a href="https://github.com/jeffreycady/Ultra-Event-Readiness-and-Risk-Assessment" target="_blank" rel="noopener">open on GitHub</a>.</p>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">HOW IT EVOLVES</div>
+    <h2>A framework that keeps improving</h2>
+    <p>Getting details like that right &mdash; what's actually a risk factor versus what's just useful context &mdash; comes from engaging with the source material directly, not assuming what "seems right." That same standard now runs on more than just my own review.</p>
+    <p>Coaches across ultrarunning, mountaineering, skimo, and long-distance hiking can flag a wrong link, a question that doesn't hold up, or a gap in what's covered &mdash; directly in the tool. Every change runs through an automated test suite before anything ships: every discipline, every score boundary, the PDF export, checked fresh every time, the same way a real risk assessment should be audited rather than trusted on faith.</p>
+  </div>
+</section>
+
+<section class="fw-cta">
+  <div class="wrap">
+    <h2>See the framework in action</h2>
+    <p>Ten checkpoints, your actual discipline, a full remediation plan, and a printable report.</p>
+    <a class="btn" href="https://uera.jcady.org/?coach=jeff">Try UERA Free &rarr;</a>
+  </div>
+</section>
 
 </body>
 </html>
