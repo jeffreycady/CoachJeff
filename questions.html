@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Every Question, Answer &amp; Source &mdash; UERA | Jeff Cady</title>
+<meta name="description" content="The complete UERA question set, live from the source CSV: every question, every answer option, every scoring rule, every remediation link.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+<style>
+  .qb-hero{
+    background:var(--pine);color:var(--cream);padding:56px 0 40px;position:relative;overflow:hidden;
+  }
+  .qb-hero::before{
+    content:'';position:absolute;inset:0;background-image:var(--contour-pattern);
+    background-size:600px;opacity:0.08;pointer-events:none;
+  }
+  .qb-hero .wrap{position:relative;}
+  .qb-back{
+    display:inline-flex;align-items:center;gap:6px;font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;color:#c8b190;text-decoration:none;margin-bottom:24px;
+  }
+  .qb-back:hover{color:var(--accent);}
+  .qb-hero h1{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:800;
+    font-size:clamp(30px,5vw,48px);line-height:1.02;margin-bottom:14px;max-width:16ch;
+  }
+  .qb-hero p{font-size:15.5px;color:#d9d2c0;max-width:60ch;line-height:1.6;margin-bottom:22px;}
+  .qb-search{
+    display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  }
+  .qb-search input{
+    flex:1;min-width:220px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.25);
+    color:var(--cream);padding:11px 14px;font-family:'Source Serif 4',serif;font-size:15px;
+    border-radius:var(--radius);
+  }
+  .qb-search input::placeholder{color:#a89c80;}
+  .qb-search input:focus{outline:none;border-color:var(--accent);}
+  .qb-count{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#a89c80;white-space:nowrap;}
+  .qb-status{
+    max-width:900px;margin:0 auto;padding:40px 20px;text-align:center;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);
+  }
+  .qb-content{max-width:900px;margin:0 auto;padding:16px 20px 80px;}
+  .qb-cat{margin-top:44px;}
+  .qb-cat:first-child{margin-top:8px;}
+  .qb-cat h2{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:24px;
+    padding-bottom:10px;border-bottom:2px solid var(--pine);margin-bottom:6px;
+  }
+  .qb-variant{margin-top:26px;}
+  .qb-variant h3{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:14px;
+  }
+  .qb-q{
+    border:1px solid var(--line);background:var(--paper-2);padding:16px 18px;margin-bottom:10px;
+  }
+  .qb-q .qtext{font-size:15px;font-weight:600;margin-bottom:8px;}
+  .qb-q .qflag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.04em;
+    color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:20px;
+    padding:2px 8px;margin-left:8px;vertical-align:middle;text-transform:uppercase;
+  }
+  .qb-q ul{margin:0;padding-left:20px;}
+  .qb-q li{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
+  .qb-q li.na-opt{font-style:italic;}
+  .qb-actions{margin-top:14px;}
+  .qb-actions h4{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.05em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:8px;
+  }
+  .qb-action-item{
+    display:flex;justify-content:space-between;gap:12px;font-size:14px;padding:7px 0;
+    border-top:1px solid var(--line-soft);
+  }
+  .qb-action-item:first-child{border-top:none;}
+  .qb-action-item a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);
+    white-space:nowrap;flex-shrink:0;}
+  .qb-action-item a:hover{text-decoration-color:var(--accent);}
+  .qb-learnmore{
+    display:flex;gap:16px;margin-top:10px;flex-wrap:wrap;
+  }
+  .qb-learnmore .lm{
+    font-size:13.5px;
+  }
+  .qb-learnmore .kind{
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:0.05em;text-transform:uppercase;
+    color:var(--accent);display:block;
+  }
+  .qb-learnmore a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(0,0,0,0.15);}
+  .qb-learnmore a:hover{text-decoration-color:var(--ink);}
+  .qb-hidden{display:none !important;}
+</style>
+</head>
+<body>
+
+<section class="qb-hero">
+  <div class="wrap">
+    <a class="qb-back" href="framework.html">&larr; Back to the Framework</a>
+    <h1>Every question, answer &amp; source</h1>
+    <p>This loads directly from the same CSV that drives the live tool and the automated rebuild pipeline &mdash; not a snapshot, not a summary. If it's out of date, that's a bug, not a different document.</p>
+    <div class="qb-search">
+      <input type="text" id="qb-search-input" placeholder="Search questions, options, or sources&hellip;" autocomplete="off">
+      <span class="qb-count" id="qb-count"></span>
+    </div>
+  </div>
+</section>
+
+<div id="qb-status" class="qb-status">Loading the live question set from GitHub&hellip;</div>
+<div id="qb-content" class="qb-content"></div>
+
+<script>
+const CSV_URL = 'https://raw.githubusercontent.com/jeffreycady/Ultra-Event-Readiness-and-Risk-Assessment/main/questions-and-learning-links.csv';
+
+const CATEGORY_ORDER = ['terrain','environment','gear','nutrition','training','medical','safety','logistics','mental','recovery'];
+
+function parseCSV(text){
+  const rows = [];
+  let row = [], field = '', inQuotes = false;
+  let i = 0;
+  const len = text.length;
+  while(i < len){
+    const c = text[i];
+    if(inQuotes){
+      if(c === '"'){
+        if(text[i+1] === '"'){ field += '"'; i += 2; continue; }
+        inQuotes = false; i++; continue;
+      }
+      field += c; i++; continue;
+    }
+    if(c === '"'){ inQuotes = true; i++; continue; }
+    if(c === ','){ row.push(field); field = ''; i++; continue; }
+    if(c === '\r'){ i++; continue; }
+    if(c === '\n'){ row.push(field); field = ''; rows.push(row); row = []; i++; continue; }
+    field += c; i++;
+  }
+  if(field.length > 0 || row.length > 0){ row.push(field); rows.push(row); }
+  return rows;
+}
+
+function rowsToObjects(rows){
+  const header = rows[0];
+  return rows.slice(1).filter(r => r.length > 1 || r[0]).map(r => {
+    const obj = {};
+    header.forEach((h, idx) => { obj[h] = r[idx] !== undefined ? r[idx] : ''; });
+    return obj;
+  });
+}
+
+function escapeHtml(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+function groupData(records){
+  // structure: { [categoryId]: { name, variants: { [variantKey]: {label, questions:[], actions:[], article, video} } } }
+  const cats = {};
+  records.forEach(r => {
+    if(r['Row Type'] === 'Calculation Formula') return;
+    const cid = r['Category ID'];
+    if(!cid) return;
+    if(!cats[cid]) cats[cid] = { name: r['Category Name'] || cid, variants: {} };
+    const vkey = r['Variant Key'] || '';
+    if(!cats[cid].variants[vkey]){
+      cats[cid].variants[vkey] = { label: r['Variant Label'] || 'General', questions: [], actions: [], article: null, video: null };
+    }
+    const bucket = cats[cid].variants[vkey];
+    if(r['Row Type'] === 'Question'){
+      bucket.questions.push({
+        text: r['Text'],
+        opts: r['Options (pipe-delimited)'].split('|').map(s => s.trim()),
+        naNum: r['NA Option #'] ? parseInt(r['NA Option #'], 10) : null,
+        info: (r['Informational Only (Y/N)'] || '').toUpperCase() === 'Y'
+      });
+    } else if(r['Row Type'] === 'Checklist Item Link'){
+      bucket.actions.push({ text: r['Text'], url: r['URL'] });
+    } else if(r['Row Type'] === 'Learn More - Article'){
+      bucket.article = { title: r['Text'], url: r['URL'], source: r['Source'] };
+    } else if(r['Row Type'] === 'Learn More - Video'){
+      bucket.video = { title: r['Text'], url: r['URL'] };
+    }
+  });
+  return cats;
+}
+
+function render(cats){
+  const container = document.getElementById('qb-content');
+  let html = '';
+  let totalQuestions = 0;
+
+  CATEGORY_ORDER.forEach(cid => {
+    const cat = cats[cid];
+    if(!cat) return;
+    html += `<div class="qb-cat" data-cat="${cid}"><h2>${escapeHtml(cat.name)}</h2>`;
+    Object.keys(cat.variants).forEach(vkey => {
+      const v = cat.variants[vkey];
+      html += `<div class="qb-variant">`;
+      if(vkey) html += `<h3>${escapeHtml(v.label)}</h3>`;
+      v.questions.forEach(q => {
+        totalQuestions++;
+        let flag = '';
+        if(q.info) flag = '<span class="qflag">Not scored</span>';
+        else if(q.naNum) flag = '<span class="qflag">Has N/A option</span>';
+        html += `<div class="qb-q" data-search="${escapeHtml((q.text + ' ' + q.opts.join(' ')).toLowerCase())}">`;
+        html += `<div class="qtext">${escapeHtml(q.text)}${flag}</div><ul>`;
+        q.opts.forEach((opt, idx) => {
+          const isNA = q.naNum && (idx + 1 === q.naNum);
+          html += `<li class="${isNA ? 'na-opt' : ''}">${escapeHtml(opt)}</li>`;
+        });
+        html += `</ul></div>`;
+      });
+      if(v.actions.length){
+        html += `<div class="qb-actions"><h4>Remediation checklist</h4>`;
+        v.actions.forEach(a => {
+          html += `<div class="qb-action-item" data-search="${escapeHtml(a.text.toLowerCase())}">
+            <span>${escapeHtml(a.text)}</span>
+            <a href="${escapeHtml(a.url)}" target="_blank" rel="noopener">Guide &#8599;</a>
+          </div>`;
+        });
+        html += `</div>`;
+      }
+      if(v.article || v.video){
+        html += `<div class="qb-learnmore">`;
+        if(v.article) html += `<div class="lm"><span class="kind">Article</span><a href="${escapeHtml(v.article.url)}" target="_blank" rel="noopener">${escapeHtml(v.article.title)}</a>${v.article.source ? ' &mdash; ' + escapeHtml(v.article.source) : ''}</div>`;
+        if(v.video) html += `<div class="lm"><span class="kind">Video</span><a href="${escapeHtml(v.video.url)}" target="_blank" rel="noopener">${escapeHtml(v.video.title)}</a></div>`;
+        html += `</div>`;
+      }
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+
+  container.innerHTML = html;
+  document.getElementById('qb-count').textContent = totalQuestions + ' questions loaded';
+}
+
+function attachSearch(){
+  const input = document.getElementById('qb-search-input');
+  input.addEventListener('input', () => {
+    const term = input.value.trim().toLowerCase();
+    document.querySelectorAll('.qb-q, .qb-action-item').forEach(el => {
+      const matches = !term || (el.dataset.search || '').includes(term);
+      el.classList.toggle('qb-hidden', !matches);
+    });
+    // Hide empty variant/category blocks when filtering
+    document.querySelectorAll('.qb-variant').forEach(v => {
+      const anyVisible = v.querySelector('.qb-q:not(.qb-hidden), .qb-action-item:not(.qb-hidden)');
+      v.classList.toggle('qb-hidden', term && !anyVisible);
+    });
+    document.querySelectorAll('.qb-cat').forEach(c => {
+      const anyVisible = c.querySelector('.qb-variant:not(.qb-hidden)');
+      c.classList.toggle('qb-hidden', term && !anyVisible);
+    });
+  });
+}
+
+fetch(CSV_URL)
+  .then(res => {
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    return res.text();
+  })
+  .then(text => {
+    const rows = parseCSV(text);
+    const records = rowsToObjects(rows);
+    const cats = groupData(records);
+    document.getElementById('qb-status').style.display = 'none';
+    render(cats);
+    attachSearch();
+  })
+  .catch(err => {
+    document.getElementById('qb-status').innerHTML =
+      'Could not load the live question set right now (' + escapeHtml(err.message) + ').<br>' +
+      'You can browse it directly on <a href="https://github.com/jeffreycady/Ultra-Event-Readiness-and-Risk-Assessment/blob/main/questions-and-learning-links.csv" target="_blank" rel="noopener" style="color:var(--accent);">GitHub</a> instead.';
+  });
+</script>
+
+</body>
+</html>
