@@ -43,6 +43,10 @@
   .facts dt{font-family:'IBM Plex Mono';font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--accent);margin-top:14px;}
   .facts dt:first-child{margin-top:0;}
   .facts dd{margin:3px 0 0;font-size:14.5px;}
+  .facts dd a, #about > .wrap > .about-grid > div > p a{
+    color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);
+  }
+  .facts dd a:hover, #about > .wrap > .about-grid > div > p a:hover{text-decoration-color:var(--accent);}
 
   @media (max-width:700px){
     .about-grid{grid-template-columns:1fr;}
@@ -91,6 +95,8 @@
   .tool-callout .copy{flex:1;min-width:240px;}
   .tool-callout h3{font-size:22px;color:var(--cream);margin-bottom:8px;}
   .tool-callout p{font-size:14.5px;color:#d9d2c0;margin:0;}
+  .tool-callout p a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
+  .tool-callout p a:hover{text-decoration-color:var(--accent);}
 
   /* ---------- FOOTER / CONTACT (page-specific parts) ---------- */
   .contact-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:28px;}
@@ -199,7 +205,7 @@
       <div class="about-grid">
         <div>
           <p>My coaching career didn't start with ultrarunning. Nearly thirty years ago, I coached children and Special Olympics athletes — and that's where I learned the lesson everything else is built on: no two people move through the world the same way. The same drill landed differently in every athlete I worked with. Some needed a different cue for the same movement, some needed more time, some needed the whole plan rebuilt around a body that didn't move the way a textbook assumed it would. A flat, one-size-fits-all plan never held up across a group like that, and it doesn't hold up across ultrarunners either. Every plan I build starts from who's actually in front of me.</p>
-          <p>I spent over a decade in cybersecurity leadership before earning my UESCA Ultrarunning Coach certification. That background shapes how I coach: I build training plans the way I'd build a security program — assess the real risk, prioritize what matters, and adjust as conditions change.</p>
+          <p>I spent over a decade in cybersecurity leadership before earning my UESCA Ultrarunning Coach certification. That background shapes how I coach: I build training plans the way I'd build a security program — assess the real risk, prioritize what matters, and adjust as conditions change. That same process is what I built the <a href="https://uera.jcady.org/?coach=jeff">Ultra Event Readiness &amp; Risk Assessment</a> around — a free framework now used across ultrarunning, mountaineering, skimo, and long-distance hiking. <a href="framework.html">Here's the logic and science behind how it actually works.</a></p>
           <p>I'm based in Goodyear, Arizona, which means heat isn't a training variable I read about — it's the default. Summer runs here start before dawn to beat triple-digit heat (100°F+ / 38°C+), and racing in the desert Southwest means heat management is never theoretical. That's shaped how seriously I take heat acclimation, hydration strategy, and teaching athletes to recognize their own warning signs before a hot day turns into a real problem. I'm active in the Phoenix trail running community with ties to the Aravaipa race circuit, and I train on the same desert trails I coach on.</p>
         </div>
         <div class="facts card">
@@ -209,6 +215,8 @@
             <dd>Goodyear, Arizona</dd>
             <dt>Credential</dt>
             <dd>UESCA Certified Ultrarunning Coach</dd>
+            <dt>Creator Of</dt>
+            <dd>The UERA framework — <a href="framework.html">how it works</a></dd>
             <dt>Coaching Since</dt>
             <dd>1&ndash;3 years (ultrarunning) &mdash; nearly 30 years coaching overall, starting with youth &amp; Special Olympics athletes</dd>
             <dt>Background</dt>
@@ -255,7 +263,7 @@
       <div class="tool-callout">
         <div class="copy">
           <h3>See this framework in action</h3>
-          <p>I built a free tool that runs the same assess-prioritize-adjust process on your own race prep — the Ultra Event Readiness &amp; Risk Assessment. Ten checkpoints, a full remediation plan, and a printable PDF report.</p>
+          <p>I built a free tool that runs the same assess-prioritize-adjust process on your own race prep — the Ultra Event Readiness &amp; Risk Assessment. Ten checkpoints, a full remediation plan, and a printable PDF report. <a href="framework.html">Read how the scoring and sourcing actually work &rarr;</a></p>
         </div>
         <a class="btn" href="https://uera.jcady.org/?coach=jeff">Try It Free &rarr;</a>
       </div>
