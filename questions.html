@@ -93,6 +93,19 @@
   }
   .qb-learnmore a{color:var(--ink);text-decoration:underline;text-decoration-color:rgba(0,0,0,0.15);}
   .qb-learnmore a:hover{text-decoration-color:var(--ink);}
+  .qb-evnote{max-width:900px;margin:0 auto;padding:22px 20px 0;}
+  .qb-evnote .box{border:1px solid var(--line);border-left:3px solid var(--accent);background:var(--paper-2);padding:16px 18px;font-size:14px;line-height:1.65;color:var(--ink-soft);}
+  .qb-evnote strong{color:var(--ink);}
+  .qb-evnote .cov{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.03em;color:var(--ink);margin-top:10px;}
+  .qb-ev{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);}
+  .qb-ev .evh{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+  .qb-ev details{margin:0 0 6px;font-size:13px;line-height:1.55;color:var(--ink-soft);}
+  .qb-ev summary{cursor:pointer;color:var(--ink);font-weight:600;}
+  .qb-ev .evtype{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.03em;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:1px 8px;margin-left:6px;}
+  .qb-ev p{margin:6px 0 4px;}
+  .qb-ev .cite{font-size:12.5px;}
+  .qb-ev a{color:var(--accent);text-decoration:underline;}
+  .qb-noev{margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.04em;color:#8a8068;text-transform:uppercase;}
   .qb-hidden{display:none !important;}
 </style>
 </head>
@@ -110,6 +123,10 @@
   </div>
 </section>
 
+<div class="qb-evnote"><div class="box">
+<strong>How to read the research.</strong> Where a question has peer-reviewed research behind its <em>premise</em>, it appears under the question as &ldquo;Research behind this question.&rdquo; That means the research supports the idea that this factor matters for endurance or mountain events. It does <strong>not</strong> validate the wording of the question, the answer options, or the scoring. Study findings are summarized from the abstracts; the &ldquo;Relevance&rdquo; line is our own inference, not the authors&rsquo;. Many questions have no research listed. That is a gap in what has been checked so far, not proof that nothing exists. The remediation links below each section are practitioner sources, not research.
+<div class="cov" id="qb-cov"></div>
+</div></div>
 <div id="qb-status" class="qb-status">Loading the live question set from GitHub&hellip;</div>
 <div id="qb-content" class="qb-content"></div>
 
@@ -170,6 +187,7 @@ function groupData(records){
       cats[cid].variants[vkey] = { label: r['Variant Label'] || 'General', questions: [], actions: [], article: null, video: null };
     }
     const bucket = cats[cid].variants[vkey];
+    if(!bucket.research) bucket.research = [];
     if(r['Row Type'] === 'Question'){
       bucket.questions.push({
         text: r['Text'],
@@ -183,6 +201,14 @@ function groupData(records){
       bucket.article = { title: r['Text'], url: r['URL'], source: r['Source'] };
     } else if(r['Row Type'] === 'Learn More - Video'){
       bucket.video = { title: r['Text'], url: r['URL'] };
+    } else if(r['Row Type'] === 'Research Evidence'){
+      const parts = (r['Text'] || '').split(' Relevance: ');
+      bucket.research.push({
+        item: parseInt(r['Item #'], 10),
+        finding: parts[0],
+        relevance: parts.slice(1).join(' Relevance: '),
+        url: r['URL'], cite: r['Source'], type: r['Evidence Type'] || ''
+      });
     }
   });
   return cats;
@@ -192,6 +218,8 @@ function render(cats){
   const container = document.getElementById('qb-content');
   let html = '';
   let totalQuestions = 0;
+  let questionsWithResearch = 0;
+  let studyUrls = {};
 
   CATEGORY_ORDER.forEach(cid => {
     const cat = cats[cid];
@@ -201,18 +229,34 @@ function render(cats){
       const v = cat.variants[vkey];
       html += `<div class="qb-variant">`;
       if(vkey) html += `<h3>${escapeHtml(v.label)}</h3>`;
-      v.questions.forEach(q => {
+      v.questions.forEach((q, qi) => {
         totalQuestions++;
+        const evs = (v.research || []).filter(e => e.item === qi + 1);
+        if(evs.length) questionsWithResearch++;
         let flag = '';
         if(q.info) flag = '<span class="qflag">Not scored</span>';
         else if(q.naNum) flag = '<span class="qflag">Has N/A option</span>';
-        html += `<div class="qb-q" data-search="${escapeHtml((q.text + ' ' + q.opts.join(' ')).toLowerCase())}">`;
+        html += `<div class="qb-q" data-search="${escapeHtml((q.text + ' ' + q.opts.join(' ') + ' ' + evs.map(e => e.cite + ' ' + e.finding + ' ' + e.type).join(' ')).toLowerCase())}">`;
         html += `<div class="qtext">${escapeHtml(q.text)}${flag}</div><ul>`;
         q.opts.forEach((opt, idx) => {
           const isNA = q.naNum && (idx + 1 === q.naNum);
           html += `<li class="${isNA ? 'na-opt' : ''}">${escapeHtml(opt)}</li>`;
         });
-        html += `</ul></div>`;
+        html += `</ul>`;
+        if(evs.length){
+          html += `<div class="qb-ev"><div class="evh">Research behind this question</div>`;
+          evs.forEach(e => {
+            studyUrls[e.url] = 1;
+            html += `<details><summary>${escapeHtml(e.cite.split(/\.\s/).slice(0,2).join('. ').slice(0,140))}${e.type ? '<span class="evtype">' + escapeHtml(e.type) + '</span>' : ''}</summary>
+              <p><strong>Finding:</strong> ${escapeHtml(e.finding)}</p>
+              ${e.relevance ? '<p><strong>Why it&rsquo;s relevant (our inference):</strong> ' + escapeHtml(e.relevance) + '</p>' : ''}
+              <p class="cite">${escapeHtml(e.cite)} <a href="${escapeHtml(e.url)}" target="_blank" rel="noopener">Source &#8599;</a></p></details>`;
+          });
+          html += `</div>`;
+        } else if(!q.info){
+          html += `<div class="qb-noev">No research linked yet</div>`;
+        }
+        html += `</div>`;
       });
       if(v.actions.length){
         html += `<div class="qb-actions"><h4>Remediation checklist</h4>`;
@@ -237,6 +281,7 @@ function render(cats){
 
   container.innerHTML = html;
   document.getElementById('qb-count').textContent = totalQuestions + ' questions loaded';
+  document.getElementById('qb-cov').textContent = questionsWithResearch + ' of ' + totalQuestions + ' questions have linked research (' + Object.keys(studyUrls).length + ' studies). ' + (totalQuestions - questionsWithResearch) + ' do not yet.';
 }
 
 function attachSearch(){
