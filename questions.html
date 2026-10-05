@@ -39,6 +39,12 @@
   }
   .qb-search input::placeholder{color:#a89c80;}
   .qb-search input:focus{outline:none;border-color:var(--accent);}
+  .qb-select{
+    background:rgba(255,255,255,0.06);border:1px solid #4a5a4d;color:#F7F2E7;padding:13px 14px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;border-radius:0;min-width:200px;
+  }
+  .qb-select:focus{outline:none;border-color:var(--accent);}
+  .qb-select option{color:#1B2A1F;background:#F7F2E7;}
   .qb-count{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#a89c80;white-space:nowrap;}
   .qb-status{
     max-width:900px;margin:0 auto;padding:40px 20px;text-align:center;
@@ -117,6 +123,21 @@
     <h1>Every question, answer &amp; source</h1>
     <p>This loads directly from the same CSV that drives the live tool and the automated rebuild pipeline &mdash; not a snapshot, not a summary. If it's out of date, that's a bug, not a different document.</p>
     <div class="qb-search">
+      <select id="qb-disc" class="qb-select" aria-label="Filter by discipline">
+        <option value="">All disciplines</option>
+        <option value="ultra">Ultramarathon</option>
+        <option value="hike">Long-distance hike</option>
+        <option value="mountaineering">Mountaineering</option>
+        <option value="skimo">Ski mountaineering (skimo)</option>
+      </select>
+      <select id="qb-cat-filter" class="qb-select" aria-label="Filter by checkpoint">
+        <option value="">All checkpoints</option>
+      </select>
+      <select id="qb-res" class="qb-select" aria-label="Filter by research">
+        <option value="">All questions</option>
+        <option value="yes">With linked research</option>
+        <option value="no">No research yet</option>
+      </select>
       <input type="text" id="qb-search-input" placeholder="Search questions, options, or sources&hellip;" autocomplete="off">
       <span class="qb-count" id="qb-count"></span>
     </div>
@@ -127,6 +148,7 @@
 <strong>How to read the research.</strong> Where a question has peer-reviewed research behind its <em>premise</em>, it appears under the question as &ldquo;Research behind this question.&rdquo; That means the research supports the idea that this factor matters for endurance or mountain events. It does <strong>not</strong> validate the wording of the question, the answer options, or the scoring. Study findings are summarized from the abstracts; the &ldquo;Relevance&rdquo; line is our own inference, not the authors&rsquo;. Many questions have no research listed. That is a gap in what has been checked so far, not proof that nothing exists. The remediation links below each section are practitioner sources, not research.
 <div class="cov" id="qb-cov"></div>
 </div></div>
+<div id="qb-empty" class="qb-evnote qb-hidden"><div class="box">No questions match these filters.</div></div>
 <div id="qb-status" class="qb-status">Loading the live question set from GitHub&hellip;</div>
 <div id="qb-content" class="qb-content"></div>
 
@@ -227,7 +249,9 @@ function render(cats){
     html += `<div class="qb-cat" data-cat="${cid}"><h2>${escapeHtml(cat.name)}</h2>`;
     Object.keys(cat.variants).forEach(vkey => {
       const v = cat.variants[vkey];
-      html += `<div class="qb-variant">`;
+      const FIRST = {firstUltraExtra:'ultra', firstHikeExtra:'hike', firstMountaineeringExtra:'mountaineering', firstSkimoExtra:'skimo'};
+      const disc = FIRST[vkey] || (['ultra','hike','mountaineering','skimo'].indexOf(vkey) >= 0 ? vkey : '');
+      html += `<div class="qb-variant" data-disc="${disc}">`;
       if(vkey) html += `<h3>${escapeHtml(v.label)}</h3>`;
       v.questions.forEach((q, qi) => {
         totalQuestions++;
@@ -236,7 +260,7 @@ function render(cats){
         let flag = '';
         if(q.info) flag = '<span class="qflag">Not scored</span>';
         else if(q.naNum) flag = '<span class="qflag">Has N/A option</span>';
-        html += `<div class="qb-q" data-search="${escapeHtml((q.text + ' ' + q.opts.join(' ') + ' ' + evs.map(e => e.cite + ' ' + e.finding + ' ' + e.type).join(' ')).toLowerCase())}">`;
+        html += `<div class="qb-q" data-research="${evs.length ? 'yes' : 'no'}" data-search="${escapeHtml((q.text + ' ' + q.opts.join(' ') + ' ' + evs.map(e => e.cite + ' ' + e.finding + ' ' + e.type).join(' ')).toLowerCase())}">`;
         html += `<div class="qtext">${escapeHtml(q.text)}${flag}</div><ul>`;
         q.opts.forEach((opt, idx) => {
           const isNA = q.naNum && (idx + 1 === q.naNum);
@@ -284,24 +308,53 @@ function render(cats){
   document.getElementById('qb-cov').textContent = questionsWithResearch + ' of ' + totalQuestions + ' questions have linked research (' + Object.keys(studyUrls).length + ' studies). ' + (totalQuestions - questionsWithResearch) + ' do not yet.';
 }
 
-function attachSearch(){
+function attachSearch(cats){
   const input = document.getElementById('qb-search-input');
-  input.addEventListener('input', () => {
-    const term = input.value.trim().toLowerCase();
-    document.querySelectorAll('.qb-q, .qb-action-item').forEach(el => {
-      const matches = !term || (el.dataset.search || '').includes(term);
-      el.classList.toggle('qb-hidden', !matches);
-    });
-    // Hide empty variant/category blocks when filtering
-    document.querySelectorAll('.qb-variant').forEach(v => {
-      const anyVisible = v.querySelector('.qb-q:not(.qb-hidden), .qb-action-item:not(.qb-hidden)');
-      v.classList.toggle('qb-hidden', term && !anyVisible);
-    });
-    document.querySelectorAll('.qb-cat').forEach(c => {
-      const anyVisible = c.querySelector('.qb-variant:not(.qb-hidden)');
-      c.classList.toggle('qb-hidden', term && !anyVisible);
-    });
+  const sel = document.getElementById('qb-disc');
+  const catSel = document.getElementById('qb-cat-filter');
+  const resSel = document.getElementById('qb-res');
+  CATEGORY_ORDER.forEach(cid => {
+    if(!cats[cid]) return;
+    const o = document.createElement('option');
+    o.value = cid; o.textContent = cats[cid].name;
+    catSel.appendChild(o);
   });
+  function apply(){
+    const term = input.value.trim().toLowerCase();
+    const disc = sel.value, cat = catSel.value, res = resSel.value;
+    document.querySelectorAll('.qb-cat').forEach(c => {
+      const catOk = !cat || c.dataset.cat === cat;
+      let catVisible = false;
+      c.querySelectorAll('.qb-variant').forEach(v => {
+        const d = v.dataset.disc || '';
+        const discOk = catOk && (!disc || d === '' || d === disc);
+        let anyVisible = false;
+        v.querySelectorAll('.qb-q').forEach(q => {
+          const ok = discOk && (!res || q.dataset.research === res) && (!term || (q.dataset.search || '').includes(term));
+          q.classList.toggle('qb-hidden', !ok);
+          if(ok) anyVisible = true;
+        });
+        v.querySelectorAll('.qb-action-item').forEach(el => {
+          // checklist links are not about research, so they are hidden while filtering by research
+          const ok = discOk && !res && (!term || (el.dataset.search || '').includes(term));
+          el.classList.toggle('qb-hidden', !ok);
+          if(ok) anyVisible = true;
+        });
+        v.querySelectorAll('.qb-actions').forEach(x => x.classList.toggle('qb-hidden', !!res));
+        v.querySelectorAll('.qb-learnmore').forEach(x => x.classList.toggle('qb-hidden', !!res || !!term));
+        v.classList.toggle('qb-hidden', !discOk || !anyVisible);
+        if(!v.classList.contains('qb-hidden')) catVisible = true;
+      });
+      c.classList.toggle('qb-hidden', !catVisible);
+    });
+    const shown = document.querySelectorAll('.qb-variant:not(.qb-hidden) .qb-q:not(.qb-hidden)').length;
+    const total = document.querySelectorAll('.qb-q').length;
+    const filtered = disc || term || cat || res;
+    document.getElementById('qb-count').textContent = filtered ? (shown + ' of ' + total + ' questions shown') : (total + ' questions loaded');
+    document.getElementById('qb-empty').classList.toggle('qb-hidden', !(filtered && shown === 0));
+  }
+  input.addEventListener('input', apply);
+  [sel, catSel, resSel].forEach(el => el.addEventListener('change', apply));
 }
 
 fetch(CSV_URL)
@@ -315,7 +368,7 @@ fetch(CSV_URL)
     const cats = groupData(records);
     document.getElementById('qb-status').style.display = 'none';
     render(cats);
-    attachSearch();
+    attachSearch(cats);
   })
   .catch(err => {
     document.getElementById('qb-status').innerHTML =
