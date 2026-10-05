@@ -60,6 +60,12 @@
   .fw-section p a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
   .fw-section p a:hover{text-decoration-color:var(--accent);}
   .fw-section p:last-child{margin-bottom:0;}
+  .fw-section ul{margin:0 0 18px;padding-left:22px;max-width:68ch;}
+  .fw-section li{font-size:16px;line-height:1.7;color:var(--ink);margin-bottom:8px;}
+  .fw-section li a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
+  .fw-section li a:hover{text-decoration-color:var(--accent);}
+  .formula-block.notation{font-size:13px;line-height:1.85;}
+  .formula-block.notation .note{display:block;color:#c8b190;font-size:12px;line-height:1.6;margin:2px 0 12px;}
   .checkpoint-grid{
     display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px;
   }
@@ -159,6 +165,15 @@
       <span class="step">overall_score</span> = ROUND( average of all 10 category scores )<br><br>
       <span class="step">tiers</span>: <span class="hi">0&ndash;33</span> Low &nbsp;|&nbsp; <span class="hi">34&ndash;66</span> Moderate &nbsp;|&nbsp; <span class="hi">67&ndash;100</span> High
     </div>
+    <p>For anyone who prefers it written formally, here is the exact calculation the tool runs:</p>
+    <div class="formula-block notation">
+      <span class="step">f<sub>q</sub></span> = i<sub>q</sub> &divide; m<sub>q</sub>
+      <span class="note">i<sub>q</sub> = position of your answer (0 = lowest-risk option). m<sub>q</sub> = number of real answer options minus 1.</span>
+      <span class="step">C<sub>k</sub></span> = ROUND( <span class="hi">100</span> &times; &Sigma; f<sub>q</sub> &divide; N<sub>k</sub> )
+      <span class="note">N<sub>k</sub> = scored questions in checkpoint k. "Not applicable" answers count as f<sub>q</sub> = 0. Informational questions are left out.</span>
+      <span class="step">O</span> = ROUND( &Sigma; C<sub>k</sub> &divide; 10 )
+      <span class="note">Every checkpoint carries the same weight (w<sub>k</sub> = 1/10). There are no event-specific weights or course-difficulty multipliers &mdash; what changes by discipline is which questions get asked, not how much each checkpoint counts.</span>
+    </div>
     <p>Two deliberate exceptions to that simple math:</p>
     <p><strong>"Not applicable" doesn't get punished.</strong> If a question doesn't apply to your event &mdash; no overnight shelter needed, no on-course medical support to look up &mdash; selecting that option scores as 0 risk, not as a missing or wrong answer. A risk assessment shouldn't penalize you for a risk that isn't there.</p>
     <p><strong>One question is informational only.</strong> Whether you've progressed through shorter distances before your first ultra is useful context for a coach, but the science doesn't support treating it as a risk factor &mdash; UESCA's own certification material is explicit that this isn't a prerequisite for success. So that answer is shown, but excluded entirely from the score. A framework that scores things has to be honest about what it doesn't actually know is risky.</p>
@@ -173,6 +188,21 @@
     <p>Don't treat a Moderate or High score across all ten checkpoints as ten things to fix this week. Look at the Risk Skyline or the Readiness Radar, find the one checkpoint that's actually tallest or reddest, and work on just that one. Trying to fix everything at once is how people burn out two weeks into a training block and fix nothing.</p>
     <p>Then reassess &mdash; retake the assessment and use <strong>Compare With a Previous Assessment</strong> to see, checkpoint by checkpoint, whether that specific thing actually moved. Not a feeling that you're "more ready," an actual before-and-after number. If it didn't move, that tells you something too: either the fix wasn't the right one, or it wasn't finished. Pick the next-highest checkpoint and repeat. That loop &mdash; assess, prioritize one thing, fix it, remeasure &mdash; is the whole framework, not just the scoring math.</p>
     <p>None of that requires trusting me, or anyone, with your data. UERA runs entirely in your browser &mdash; there's no server collecting your answers, and Compare works the same way, reading both PDFs locally on your own device. It's private to you by default. You decide if anyone ever sees it, including me.</p>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">LIMITATIONS</div>
+    <h2>What the score can't tell you</h2>
+    <p>A framework that scores things should say plainly where its scoring is a judgment call. Here is where UERA's is.</p>
+    <ul>
+      <li><strong>Averaging can hide a single serious gap.</strong> Because the overall score is a plain average, one checkpoint in real trouble can be diluted by nine good ones. Nine checkpoints at 0 and one at 100 gives an overall score of 10 &mdash; "Low." Four checkpoints at 100 and six at 0 gives 40 &mdash; "Moderate." UERA has no override rule that forces the overall tier up when one checkpoint is severe. What it does instead is show every checkpoint's own score and tier, plus the Risk Skyline and Readiness Radar, so the weak point stays visible. Read the individual checkpoints first and the overall number second.</li>
+      <li><strong>Equal weights are a design choice, not a measured result.</strong> Nothing here proves that Recovery Plan and Medical &amp; Injury History deserve the same weight, or that heat acclimation should count for more in a desert 100-miler than in a cold-weather 50K. I chose equal weights because I had no defensible basis for any other set. Doing better would take outcome data I don't have.</li>
+      <li><strong>The tier cutoffs are even thirds.</strong> Low, Moderate and High split the 0&ndash;100 range at 34 and 67. That is a readable convention, not a threshold derived from race outcomes or clinical research.</li>
+      <li><strong>It is self-reported.</strong> UERA can't verify what you tell it. To limit wishful answers, the options describe what you have actually done rather than how ready you feel &mdash; for example, "multiple training hikes at or near my actual trip weight" versus "only hiked with a light daypack." That narrows the room for optimism, but it doesn't remove it.</li>
+      <li><strong>It is not a medical assessment.</strong> The Medical &amp; Injury History checkpoint captures what you report, not your actual health. UERA is a self-assessment aid for finding where your final prep needs attention. It isn't medical advice and doesn't replace a coach or a doctor.</li>
+    </ul>
   </div>
 </section>
 
@@ -213,6 +243,8 @@
     <h2>A framework that keeps improving</h2>
     <p>Getting details like that right &mdash; what's actually a risk factor versus what's just useful context &mdash; comes from engaging with the source material directly, not assuming what "seems right." That same standard now runs on more than just my own review.</p>
     <p>Coaches across ultrarunning, mountaineering, skimo, and long-distance hiking can flag a wrong link, a question that doesn't hold up, or a gap in what's covered &mdash; directly in the tool. Every change runs through an automated test suite before anything ships: every discipline, every score boundary, the PDF export, checked fresh every time, the same way a real risk assessment should be audited rather than trusted on faith.</p>
+    <p><strong>What "sourced" does and doesn't mean here.</strong> Every question traces to a named source, but UERA has not been through formal validation. It has not had its content reviewed by an independent expert panel, its scores haven't been tested for repeatability, and they haven't been compared against actual race outcomes such as finishes, DNFs or medical-tent visits. Source-grounded is a lower bar than validated, and I'd rather say so than let the first imply the second.</p>
+    <p>If you're a researcher, a race director, or a coach who wants to help close that gap &mdash; reviewing question content, testing reliability, or tracking outcomes in a cohort &mdash; I'd like to hear from you at <a href="mailto:coach@jcady.org">coach@jcady.org</a>.</p>
   </div>
 </section>
 
