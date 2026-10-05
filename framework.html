@@ -64,6 +64,16 @@
   .fw-section li{font-size:16px;line-height:1.7;color:var(--ink);margin-bottom:8px;}
   .fw-section li a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
   .fw-section li a:hover{text-decoration-color:var(--accent);}
+  .matrix-wrap{overflow-x:auto;margin:22px 0 14px;border:1px solid var(--line);background:var(--paper-2);}
+  .matrix{width:100%;border-collapse:collapse;font-size:14px;min-width:620px;}
+  .matrix caption{text-align:left;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--line);}
+  .matrix th,.matrix td{padding:11px 14px;text-align:left;vertical-align:top;border-top:1px solid var(--line-soft);line-height:1.5;}
+  .matrix thead th{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);border-top:none;background:rgba(0,0,0,0.04);}
+  .matrix tbody th{font-weight:600;color:var(--ink);}
+  .matrix td.num{font-family:'IBM Plex Mono',monospace;text-align:right;white-space:nowrap;}
+  .matrix .doms{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);}
+  .matrix tfoot td,.matrix tfoot th{font-weight:600;border-top:2px solid var(--line);}
+  .matrix-status{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);margin:18px 0;}
   .formula-block.notation{font-size:13px;line-height:1.85;}
   .formula-block.notation .note{display:block;color:#c8b190;font-size:12px;line-height:1.6;margin:2px 0 12px;}
   .checkpoint-grid{
@@ -239,6 +249,24 @@
 
 <section class="fw-section">
   <div class="wrap">
+    <div class="fw-kicker">EVIDENCE BASE</div>
+    <h2>Source matrix, by checkpoint</h2>
+    <p>This table is built live from the same data file the tool runs on, so it can't drift out of date. For each checkpoint it counts the questions, how many of them have peer-reviewed research linked, and the practitioner guidance links, and lists which sites those links come from. Research citations are counted separately from guidance links.</p>
+    <p id="matrix-summary" class="matrix-status">Loading the live source data&hellip;</p>
+    <div class="matrix-wrap" id="matrix-wrap" hidden>
+      <table class="matrix">
+        <caption>Questions, linked research and guidance links per checkpoint, across all disciplines and training phases</caption>
+        <thead><tr><th scope="col">Checkpoint</th><th scope="col" style="text-align:right">Questions</th><th scope="col" style="text-align:right">With research</th><th scope="col" style="text-align:right">Guidance links</th><th scope="col">Where the links come from</th></tr></thead>
+        <tbody id="matrix-body"></tbody>
+        <tfoot id="matrix-foot"></tfoot>
+      </table>
+    </div>
+    <p>Three things to read this table with. First, the counts cover every discipline and phase variant at once, so one person taking the assessment sees only a fraction of those questions. Second, the guidance links are practitioner sources &mdash; coaching organizations, trail-running media, gear guides and instructional videos. They show where each piece of guidance comes from and let you check it yourself, but a coach's article is weaker evidence than a controlled study. Third, the research column counts questions whose <em>premise</em> has a peer-reviewed study, review or consensus statement behind it. It does not mean the question wording or scoring has been validated, and it is not a systematic literature review. The literature behind each question is shown on the <a href="questions.html" style="color:var(--accent);">questions page</a>, with the finding, our inference and a link. Checkpoints showing few or no research-backed questions, such as Logistics, are the ones I'd most like help strengthening.</p>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
     <div class="fw-kicker">HOW IT EVOLVES</div>
     <h2>A framework that keeps improving</h2>
     <p>Getting details like that right &mdash; what's actually a risk factor versus what's just useful context &mdash; comes from engaging with the source material directly, not assuming what "seems right." That same standard now runs on more than just my own review.</p>
@@ -255,6 +283,68 @@
     <a class="btn" href="https://uera.jcady.org/?coach=jeff">Try UERA Free &rarr;</a>
   </div>
 </section>
+
+<script>
+(function(){
+  var CSV_URL = 'https://raw.githubusercontent.com/jeffreycady/Ultra-Event-Readiness-and-Risk-Assessment/main/questions-and-learning-links.csv';
+  var ORDER = ['terrain','environment','gear','nutrition','training','medical','safety','logistics','mental','recovery'];
+  var RESEARCH = /(^|\.)(pubmed\.ncbi\.nlm\.nih\.gov|ncbi\.nlm\.nih\.gov|doi\.org|sciencedirect\.com|bjsm\.bmj\.com|journals\.lww\.com|link\.springer\.com|nature\.com|jamanetwork\.com|onlinelibrary\.wiley\.com|tandfonline\.com|frontiersin\.org|mdpi\.com|journals\.humankinetics\.com)$/;
+
+  function parseCSV(text){
+    var rows=[],row=[],field='',inQ=false,i=0,n=text.length;
+    while(i<n){
+      var c=text[i];
+      if(inQ){
+        if(c==='"'){ if(text[i+1]==='"'){field+='"';i+=2;continue;} inQ=false;i++;continue; }
+        field+=c;i++;continue;
+      }
+      if(c==='"'){inQ=true;i++;continue;}
+      if(c===','){row.push(field);field='';i++;continue;}
+      if(c==='\r'){i++;continue;}
+      if(c==='\n'){row.push(field);field='';rows.push(row);row=[];i++;continue;}
+      field+=c;i++;
+    }
+    if(field.length||row.length){row.push(field);rows.push(row);}
+    return rows;
+  }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function host(u){try{return new URL(u).hostname.replace(/^www\./,'');}catch(e){return null;}}
+
+  fetch(CSV_URL).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); }).then(function(text){
+    var rows=parseCSV(text), head=rows[0], recs=rows.slice(1).filter(function(r){return r.length>1;}).map(function(r){
+      var o={}; head.forEach(function(h,i){o[h]=r[i]||'';}); return o;
+    });
+    var cats={}, allHosts={}, totalQ=0, totalL=0, research=0, seen={}, rqTotal=0, studies={};
+    recs.forEach(function(r){
+      var cid=r['Category ID']; if(!cid) return;
+      var c=cats[cid]||(cats[cid]={name:r['Category Name']||cid,q:0,l:0,hosts:{},rq:{}});
+      if(r['Row Type']==='Question'){ c.q++; totalQ++; }
+      else if(r['Row Type']==='Research Evidence'){
+        var k=(r['Variant Key']||'')+'|'+r['Item #']; if(!c.rq[k]){c.rq[k]=1; rqTotal++;} studies[r['URL']]=1;
+      }
+      else if(r['URL']){
+        var h=host(r['URL']); if(!h) return;
+        c.l++; totalL++; c.hosts[h]=(c.hosts[h]||0)+1; allHosts[h]=1;
+        if(RESEARCH.test(h)) research++;
+      }
+    });
+    var body='';
+    ORDER.forEach(function(id){
+      var c=cats[id]; if(!c) return;
+      var hs=Object.keys(c.hosts).sort(function(a,b){return c.hosts[b]-c.hosts[a]||a.localeCompare(b);});
+      body+='<tr><th scope="row">'+esc(c.name)+'</th><td class="num">'+c.q+'</td><td class="num">'+Object.keys(c.rq).length+'</td><td class="num">'+c.l+'</td><td class="doms">'+
+        hs.map(function(h){return esc(h)+' &times;'+c.hosts[h];}).join('<br>')+'</td></tr>';
+    });
+    document.getElementById('matrix-body').innerHTML=body;
+    document.getElementById('matrix-foot').innerHTML='<tr><th scope="row">All checkpoints</th><td class="num">'+totalQ+'</td><td class="num">'+rqTotal+'</td><td class="num">'+totalL+'</td><td class="doms">'+Object.keys(allHosts).length+' distinct sites</td></tr>';
+    document.getElementById('matrix-summary').textContent=
+      rqTotal+' of '+totalQ+' questions have linked research ('+Object.keys(studies).length+' studies). '+totalL+' practitioner guidance links across '+Object.keys(allHosts).length+' sites.';
+    document.getElementById('matrix-wrap').hidden=false;
+  }).catch(function(err){
+    document.getElementById('matrix-summary').innerHTML='Could not load the live source data right now ('+esc(err.message)+'). The full file is on <a href="https://github.com/jeffreycady/Ultra-Event-Readiness-and-Risk-Assessment/blob/main/questions-and-learning-links.csv" target="_blank" rel="noopener" style="color:var(--accent);">GitHub</a>.';
+  });
+})();
+</script>
 
 <script data-goatcounter="https://jcady.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
