@@ -274,7 +274,7 @@ function render(cats){
             html += `<details><summary>${escapeHtml(e.cite.split(/\.\s/).slice(0,2).join('. ').slice(0,140))}${e.type ? '<span class="evtype">' + escapeHtml(e.type) + '</span>' : ''}</summary>
               <p><strong>Finding:</strong> ${escapeHtml(e.finding)}</p>
               ${e.relevance ? '<p><strong>Why it&rsquo;s relevant (our inference):</strong> ' + escapeHtml(e.relevance) + '</p>' : ''}
-              <p class="cite">${escapeHtml(e.cite)} <a href="${escapeHtml(e.url)}" target="_blank" rel="noopener">Source &#8599;</a></p></details>`;
+              <p class="cite">${escapeHtml(e.cite)} ${/^https?:\/\//.test(e.url||'') ? `<a href="${escapeHtml(e.url)}" target="_blank" rel="noopener">Source &#8599;</a>` : ''}</p></details>`;
           });
           html += `</div>`;
         } else if(!q.info){
@@ -287,7 +287,7 @@ function render(cats){
         v.actions.forEach(a => {
           html += `<div class="qb-action-item" data-search="${escapeHtml(a.text.toLowerCase())}">
             <span>${escapeHtml(a.text)}</span>
-            <a href="${escapeHtml(a.url)}" target="_blank" rel="noopener">Guide &#8599;</a>
+            ${/^https?:\/\//.test(a.url||'') ? `<a href="${escapeHtml(a.url)}" target="_blank" rel="noopener">Guide &#8599;</a>` : ''}
           </div>`;
         });
         html += `</div>`;
