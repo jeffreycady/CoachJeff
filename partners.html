@@ -145,6 +145,11 @@
   .apply-form .full{grid-column:1 / -1;}
   .apply-form .hint{font-size:12.5px;color:#b7ac93;margin-top:2px;}
   .apply-form button{grid-column:1 / -1;justify-self:start;}
+  .field{display:flex;flex-direction:column;gap:6px;min-width:0;}
+  .field label{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#d9d2c0;}
+  .field input[type=text],.field input[type=email],.field input[type=url],.field textarea{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.25);color:#F7F2E7;padding:10px 12px;font-family:'Source Serif 4',serif;font-size:15px;border-radius:var(--radius);width:100%;box-sizing:border-box;}
+  .field textarea{min-height:150px;resize:vertical;line-height:1.5;}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);}
   .field select{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.25);color:#F7F2E7;padding:10px 12px;font-family:'Source Serif 4',serif;font-size:15px;border-radius:var(--radius);width:100%;}
   .field select option{color:#232922;}
   .field select:focus{outline:none;border-color:var(--accent);}
@@ -250,7 +255,7 @@
         </select>
       </div>
       <div class="field full"><label for="ap-blurb">Your question or message</label>
-        <textarea id="ap-blurb" name="message" maxlength="1000" required placeholder="e.g. We are a team of four coaches and want a branded link for each of us."></textarea>
+        <textarea id="ap-blurb" name="message" maxlength="1000" rows="6" required placeholder="e.g. We are a team of four coaches and want a branded link for each of us."></textarea>
       </div>
       <div class="field full"><label for="ap-cert">Certifications or credentials (optional)</label><input type="text" id="ap-cert" name="credentials"></div>
       <div class="field full"><label style="display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:14px;color:#d9d2c0;font-family:'Source Serif 4',serif;">
