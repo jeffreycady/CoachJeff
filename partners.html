@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Coaches &mdash; Branded UERA Link | Jeff Cady</title>
+<meta name="description" content="Licensed coaches can send athletes a branded link to the Ultra Event Readiness &amp; Risk Assessment, showing the coach's logo and name on the start page, results, and PDF report.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+<style>
+
+  .fw-hero{
+    background:var(--pine);
+    color:var(--cream);
+    padding:72px 0 56px;
+    position:relative;
+    overflow:hidden;
+  }
+  .fw-hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background-image:var(--contour-pattern);
+    background-size:600px;
+    opacity:0.08;
+    pointer-events:none;
+  }
+  .fw-hero .wrap{position:relative;}
+  .fw-back{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#c8b190;
+    text-decoration:none;margin-bottom:28px;
+  }
+  .fw-back:hover{color:var(--accent);}
+  .fw-hero h1{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:800;
+    font-size:clamp(38px,6vw,64px);
+    line-height:0.98;
+    margin-bottom:18px;
+    max-width:14ch;
+  }
+  .fw-hero .lede{
+    font-size:17px;color:#d9d2c0;max-width:58ch;line-height:1.6;
+  }
+  .fw-section{padding:56px 0;border-bottom:1px solid var(--line);}
+  .fw-section:last-of-type{border-bottom:none;}
+  .fw-section .wrap{max-width:760px;}
+  .fw-section h2{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:700;font-size:clamp(26px,4vw,34px);
+    margin-bottom:6px;
+  }
+  .fw-kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);
+    margin-bottom:10px;
+  }
+  .fw-section p{font-size:16px;line-height:1.7;color:var(--ink);margin-bottom:16px;max-width:68ch;}
+  .fw-section p a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
+  .fw-section p a:hover{text-decoration-color:var(--accent);}
+  .fw-section p:last-child{margin-bottom:0;}
+  .fw-section ul{margin:0 0 18px;padding-left:22px;max-width:68ch;}
+  .fw-section li{font-size:16px;line-height:1.7;color:var(--ink);margin-bottom:8px;}
+  .fw-section li a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
+  .fw-section li a:hover{text-decoration-color:var(--accent);}
+  .matrix-wrap{overflow-x:auto;margin:22px 0 14px;border:1px solid var(--line);background:var(--paper-2);}
+  .matrix{width:100%;border-collapse:collapse;font-size:14px;min-width:620px;}
+  .matrix caption{text-align:left;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--line);}
+  .matrix th,.matrix td{padding:11px 14px;text-align:left;vertical-align:top;border-top:1px solid var(--line-soft);line-height:1.5;}
+  .matrix thead th{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);border-top:none;background:rgba(0,0,0,0.04);}
+  .matrix tbody th{font-weight:600;color:var(--ink);}
+  .matrix td.num{font-family:'IBM Plex Mono',monospace;text-align:right;white-space:nowrap;}
+  .matrix .doms{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);}
+  .matrix tfoot td,.matrix tfoot th{font-weight:600;border-top:2px solid var(--line);}
+  .matrix-status{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);margin:18px 0;}
+  .formula-block.notation{font-size:13px;line-height:1.85;}
+  .formula-block.notation .note{display:block;color:#c8b190;font-size:12px;line-height:1.6;margin:2px 0 12px;}
+  .checkpoint-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px;
+  }
+  @media (max-width:640px){.checkpoint-grid{grid-template-columns:1fr;}}
+  .checkpoint-grid .cp{
+    border:1px solid var(--line);padding:16px 18px;background:var(--paper-2);
+  }
+  .checkpoint-grid .cp .num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+  }
+  .checkpoint-grid .cp h4{
+    font-family:'Big Shoulders Display',sans-serif;font-size:18px;font-weight:700;
+    margin:4px 0 6px;
+  }
+  .checkpoint-grid .cp p{font-size:14px;margin:0;color:var(--ink-soft);}
+  .formula-block{
+    background:var(--pine);color:var(--cream);
+    padding:22px 24px;margin:22px 0;
+    font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.9;
+  }
+  .formula-block .step{color:#c8b190;}
+  .formula-block .hi{color:var(--accent);}
+  .case-study{
+    border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin:24px 0;
+  }
+  .case-study p{font-style:italic;color:var(--ink-soft);}
+  .source-list{margin-top:20px;display:flex;flex-direction:column;gap:0;}
+  .source-list .src{
+    display:flex;gap:16px;padding:13px 0;border-top:1px solid var(--line-soft);
+    font-size:14.5px;
+  }
+  .source-list .src:first-child{border-top:none;}
+  .source-list .src .domain{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+    width:120px;flex-shrink:0;padding-top:2px;
+  }
+  .source-list .src .what{color:var(--ink);}
+  .source-list .src .what span{color:var(--ink-soft);display:block;font-size:13px;margin-top:2px;}
+  .fw-cta{
+    background:var(--pine);color:var(--cream);padding:56px 0;text-align:center;
+  }
+  .fw-cta h2{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:clamp(24px,4vw,32px);
+    margin-bottom:14px;
+  }
+  .fw-cta p{color:#d9d2c0;max-width:52ch;margin:0 auto 28px;font-size:15.5px;}
+
+  .pt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line-soft);border:1px solid var(--line-soft);margin:24px 0 8px;}
+  .pt-card{background:var(--paper-2);padding:20px;display:flex;flex-direction:column;gap:6px;}
+  .pt-card .price{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);}
+  .pt-card h4{font-family:'Big Shoulders Display',sans-serif;font-size:19px;font-weight:700;margin:0;}
+  .pt-card p{font-size:14px;color:var(--ink-soft);margin:0;flex:1;}
+  .pt-card .btn{align-self:flex-start;margin-top:10px;}
+  @media (max-width:760px){.pt-grid{grid-template-columns:1fr;}}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:18px 0;}
+  .steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:16px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border:1px solid var(--accent);color:var(--accent);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .example-link{background:var(--pine);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:14px 18px;margin:16px 0;word-break:break-all;}
+  .example-link .hi{color:var(--accent);}
+  .apply{background:var(--pine);color:var(--cream);padding:56px 0;}
+  .apply .wrap{max-width:760px;}
+  .apply h2{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:clamp(26px,4vw,34px);margin-bottom:10px;}
+  .apply p.lead-f{color:#d9d2c0;font-size:15.5px;max-width:58ch;margin-bottom:26px;}
+  .apply-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:640px;}
+  .apply-form .full{grid-column:1 / -1;}
+  .apply-form .hint{font-size:12.5px;color:#b7ac93;margin-top:2px;}
+  .apply-form button{grid-column:1 / -1;justify-self:start;}
+  .field select{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.25);color:#F7F2E7;padding:10px 12px;font-family:'Source Serif 4',serif;font-size:15px;border-radius:var(--radius);width:100%;}
+  .field select option{color:#232922;}
+  .field select:focus{outline:none;border-color:var(--accent);}
+  .form-status{background:rgba(75,122,78,0.18);border:1px solid var(--low);color:var(--cream);padding:14px 18px;margin-bottom:24px;max-width:640px;font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  @media (max-width:560px){.apply-form{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<section class="fw-hero">
+  <div class="wrap">
+    <a class="fw-back" href="index.html">&larr; Back to jcady.org</a>
+    <div class="fw-kicker">FOR COACHES</div>
+    <h1>Your athletes, your name on the report</h1>
+    <p class="lede">Send your athletes a link to the Ultra Event Readiness &amp; Risk Assessment that carries your logo and name &mdash; on the start page, at the top of their results, and on their PDF report &mdash; with a direct path back to you.</p>
+    <a class="btn" href="#apply" style="margin-top:28px;display:inline-block;">Apply for a Branded Link &rarr;</a>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">WHAT YOUR ATHLETES SEE</div>
+    <h2>Your branding, in three places</h2>
+    <ul>
+      <li><strong>Start page:</strong> a &ldquo;Shared by&rdquo; bar at the top with your logo, your name, and a link to your site.</li>
+      <li><strong>Results:</strong> a coach card with your logo and your own short message, at the top of the results page &mdash; before the athlete scrolls into the details.</li>
+      <li><strong>PDF report:</strong> a header band with your logo, name, and website on the first page, and your message in the coach section.</li>
+    </ul>
+    <p>The tool itself stays the same: same ten checkpoints, same scoring, same sources. Every page still credits the framework and its author. This is a co-branded referral, not a white-label.</p>
+    <div class="example-link">https://uera.jcady.org/?coach=<span class="hi">yourname</span></div>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">PRIVACY</div>
+    <h2>What you do and don&rsquo;t get</h2>
+    <p>UERA runs entirely in the athlete&rsquo;s browser. Nothing they answer is stored or sent anywhere, and that includes you. The link only chooses whose name and logo appear. You will not receive their answers, scores, or any tracking data.</p>
+    <p>If an athlete wants you to see their results, they can send you their PDF, or bring it to a session. That keeps the choice with them, and it is the same promise UERA makes to everyone who uses it.</p>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">LICENSING</div>
+    <h2>Branded links come with a coach license</h2>
+    <p>Using UERA with your own coached athletes requires a coach license. Personal use stays free for athletes. Pricing and terms are the same ones shown in the tool&rsquo;s License screen.</p>
+    <div class="pt-grid">
+      <div class="pt-card">
+        <h4>Individual Coach License</h4>
+        <div class="price">$49 / year</div>
+        <p>Use UERA with your own coached athletes, unlimited athletes, one coach. Renews annually.</p>
+        <a class="btn" href="https://buy.stripe.com/7sY5kF1rMd0Z1N4fQd7bW00" target="_blank" rel="noopener">Buy Individual License &rarr;</a>
+      </div>
+      <div class="pt-card">
+        <h4>Coaching Business / Team</h4>
+        <div class="price">$129 / year</div>
+        <p>Multiple coaches at one business, or use inside a program or gym. Renews annually.</p>
+        <a class="btn" href="https://buy.stripe.com/00wfZj7Qa8KJ1N4cE17bW02" target="_blank" rel="noopener">Buy Team License &rarr;</a>
+      </div>
+      <div class="pt-card">
+        <h4>Personal Use</h4>
+        <div class="price">Free</div>
+        <p>For athletes preparing their own races or hikes. No branded link needed.</p>
+        <a class="btn" href="https://uera.jcady.org/?coach=jeff">Try UERA Free &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fw-section">
+  <div class="wrap">
+    <div class="fw-kicker">HOW IT WORKS</div>
+    <h2>From application to live link</h2>
+    <ol class="steps">
+      <li><strong>Get a license</strong> above, if you don&rsquo;t have one yet.</li>
+      <li><strong>Apply below</strong> with your name, business, website, the short name you want in your link, and a two-sentence message to your athletes.</li>
+      <li><strong>Send your logo.</strong> I&rsquo;ll email you after you apply. Send it as a PNG or SVG with a transparent or white background, at least 400 px wide and under 300 KB. It is shown on a light tile, so a dark or full-color logo works best.</li>
+      <li><strong>I review and publish.</strong> Each coach is added by hand, which keeps the tool trustworthy for athletes. I&rsquo;ll send you your finished link and check it with you before it goes out.</li>
+    </ol>
+    <p>I may decline or remove a branded link, for example if a license has lapsed or the branding could mislead athletes about who built the tool. Applying doesn&rsquo;t guarantee approval.</p>
+  </div>
+</section>
+
+<section id="apply" class="apply">
+  <div class="wrap">
+    <h2>Apply for a branded link</h2>
+    <p class="lead-f">Tell me a bit about your coaching. I&rsquo;ll reply by email to confirm your license, ask for your logo, and set up your link.</p>
+    <div id="applyStatus" class="form-status" hidden>Thanks &mdash; that&rsquo;s sent. I&rsquo;ll email you to confirm details and ask for your logo.</div>
+    <form id="applyForm" class="apply-form" action="https://formspree.io/f/moeqvykw" method="POST">
+      <div class="field"><label for="ap-name">Your name</label><input type="text" id="ap-name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="ap-email">Email</label><input type="email" id="ap-email" name="email" required autocomplete="email"></div>
+      <div class="field"><label for="ap-biz">Business or coaching name</label><input type="text" id="ap-biz" name="business" required></div>
+      <div class="field"><label for="ap-site">Website (https://)</label><input type="url" id="ap-site" name="website" required placeholder="https://"></div>
+      <div class="field"><label for="ap-slug">Link name</label><input type="text" id="ap-slug" name="requested_slug" required pattern="[a-z][a-z0-9\-]{1,30}" placeholder="yourname"><span class="hint">Lowercase letters, numbers, hyphens. Becomes ?coach=yourname</span></div>
+      <div class="field"><label for="ap-license">Coach license</label>
+        <select id="ap-license" name="license_status" required>
+          <option value="">Choose one</option>
+          <option>I have an Individual Coach License</option>
+          <option>I have a Team License</option>
+          <option>I&rsquo;m buying one now</option>
+          <option>Not yet, I have questions first</option>
+        </select>
+      </div>
+      <div class="field full"><label for="ap-blurb">Message to your athletes (about 240 characters)</label>
+        <textarea id="ap-blurb" name="athlete_message" maxlength="300" required placeholder="e.g. This assessment was shared with you by Sarah Smith, a certified coach. Want help turning these results into an actual plan? Get in touch."></textarea>
+        <span class="hint">Write it as a referral from you. It shouldn&rsquo;t claim you built the tool.</span>
+      </div>
+      <div class="field full"><label for="ap-cert">Certifications or credentials (optional)</label><input type="text" id="ap-cert" name="credentials"></div>
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="_subject" value="Partner application &mdash; UERA branded link">
+      <input type="hidden" name="_next" id="ap-next" value="">
+      <button type="submit" class="btn">Send Application &rarr;</button>
+    </form>
+  </div>
+</section>
+
+<section class="fw-cta">
+  <div class="wrap">
+    <h2>Questions first?</h2>
+    <p>Email me before you apply and I&rsquo;ll answer anything about licensing, branding, or how athletes use the tool.</p>
+    <a class="btn" href="mailto:coach@jcady.org?subject=UERA%20coach%20partner%20question">Email coach@jcady.org &rarr;</a>
+  </div>
+</section>
+
+<script>
+  (function(){
+    var next = document.getElementById('ap-next');
+    if(next) next.value = window.location.origin + window.location.pathname + '?sent=true#apply';
+    if(window.location.search.indexOf('sent=true') !== -1){
+      var st = document.getElementById('applyStatus'), f = document.getElementById('applyForm');
+      if(st) st.hidden = false;
+      if(f) f.hidden = true;
+      history.replaceState(null, '', window.location.pathname + '#apply');
+    }
+  })();
+</script>
+
+<script data-goatcounter="https://jcady.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
