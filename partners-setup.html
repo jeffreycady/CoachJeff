@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Set Up Your Branded UERA Link | Jeff Cady</title>
+<meta name="description" content="Finish setting up your branded UERA link after buying a coach license.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
+<style>
+
+  .fw-hero{
+    background:var(--pine);
+    color:var(--cream);
+    padding:72px 0 56px;
+    position:relative;
+    overflow:hidden;
+  }
+  .fw-hero::before{
+    content:'';
+    position:absolute;inset:0;
+    background-image:var(--contour-pattern);
+    background-size:600px;
+    opacity:0.08;
+    pointer-events:none;
+  }
+  .fw-hero .wrap{position:relative;}
+  .fw-back{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#c8b190;
+    text-decoration:none;margin-bottom:28px;
+  }
+  .fw-back:hover{color:var(--accent);}
+  .fw-hero h1{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:800;
+    font-size:clamp(38px,6vw,64px);
+    line-height:0.98;
+    margin-bottom:18px;
+    max-width:14ch;
+  }
+  .fw-hero .lede{
+    font-size:17px;color:#d9d2c0;max-width:58ch;line-height:1.6;
+  }
+  .fw-section{padding:56px 0;border-bottom:1px solid var(--line);}
+  .fw-section:last-of-type{border-bottom:none;}
+  .fw-section .wrap{max-width:760px;}
+  .fw-section h2{
+    font-family:'Big Shoulders Display',sans-serif;
+    font-weight:700;font-size:clamp(26px,4vw,34px);
+    margin-bottom:6px;
+  }
+  .fw-kicker{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent);
+    margin-bottom:10px;
+  }
+  .fw-section p{font-size:16px;line-height:1.7;color:var(--ink);margin-bottom:16px;max-width:68ch;}
+  .fw-section p a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
+  .fw-section p a:hover{text-decoration-color:var(--accent);}
+  .fw-section p:last-child{margin-bottom:0;}
+  .fw-section ul{margin:0 0 18px;padding-left:22px;max-width:68ch;}
+  .fw-section li{font-size:16px;line-height:1.7;color:var(--ink);margin-bottom:8px;}
+  .fw-section li a{color:var(--accent);text-decoration:underline;text-decoration-color:rgba(203,90,40,0.4);}
+  .fw-section li a:hover{text-decoration-color:var(--accent);}
+  .matrix-wrap{overflow-x:auto;margin:22px 0 14px;border:1px solid var(--line);background:var(--paper-2);}
+  .matrix{width:100%;border-collapse:collapse;font-size:14px;min-width:620px;}
+  .matrix caption{text-align:left;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-soft);border-bottom:1px solid var(--line);}
+  .matrix th,.matrix td{padding:11px 14px;text-align:left;vertical-align:top;border-top:1px solid var(--line-soft);line-height:1.5;}
+  .matrix thead th{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);border-top:none;background:rgba(0,0,0,0.04);}
+  .matrix tbody th{font-weight:600;color:var(--ink);}
+  .matrix td.num{font-family:'IBM Plex Mono',monospace;text-align:right;white-space:nowrap;}
+  .matrix .doms{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);}
+  .matrix tfoot td,.matrix tfoot th{font-weight:600;border-top:2px solid var(--line);}
+  .matrix-status{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-soft);margin:18px 0;}
+  .formula-block.notation{font-size:13px;line-height:1.85;}
+  .formula-block.notation .note{display:block;color:#c8b190;font-size:12px;line-height:1.6;margin:2px 0 12px;}
+  .checkpoint-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px;
+  }
+  @media (max-width:640px){.checkpoint-grid{grid-template-columns:1fr;}}
+  .checkpoint-grid .cp{
+    border:1px solid var(--line);padding:16px 18px;background:var(--paper-2);
+  }
+  .checkpoint-grid .cp .num{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+  }
+  .checkpoint-grid .cp h4{
+    font-family:'Big Shoulders Display',sans-serif;font-size:18px;font-weight:700;
+    margin:4px 0 6px;
+  }
+  .checkpoint-grid .cp p{font-size:14px;margin:0;color:var(--ink-soft);}
+  .formula-block{
+    background:var(--pine);color:var(--cream);
+    padding:22px 24px;margin:22px 0;
+    font-family:'IBM Plex Mono',monospace;font-size:13.5px;line-height:1.9;
+  }
+  .formula-block .step{color:#c8b190;}
+  .formula-block .hi{color:var(--accent);}
+  .case-study{
+    border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin:24px 0;
+  }
+  .case-study p{font-style:italic;color:var(--ink-soft);}
+  .source-list{margin-top:20px;display:flex;flex-direction:column;gap:0;}
+  .source-list .src{
+    display:flex;gap:16px;padding:13px 0;border-top:1px solid var(--line-soft);
+    font-size:14.5px;
+  }
+  .source-list .src:first-child{border-top:none;}
+  .source-list .src .domain{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);
+    width:120px;flex-shrink:0;padding-top:2px;
+  }
+  .source-list .src .what{color:var(--ink);}
+  .source-list .src .what span{color:var(--ink-soft);display:block;font-size:13px;margin-top:2px;}
+  .fw-cta{
+    background:var(--pine);color:var(--cream);padding:56px 0;text-align:center;
+  }
+  .fw-cta h2{
+    font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:clamp(24px,4vw,32px);
+    margin-bottom:14px;
+  }
+  .fw-cta p{color:#d9d2c0;max-width:52ch;margin:0 auto 28px;font-size:15.5px;}
+
+  .pt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line-soft);border:1px solid var(--line-soft);margin:24px 0 8px;}
+  .pt-card{background:var(--paper-2);padding:20px;display:flex;flex-direction:column;gap:6px;}
+  .pt-card .price{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent);}
+  .pt-card h4{font-family:'Big Shoulders Display',sans-serif;font-size:19px;font-weight:700;margin:0;}
+  .pt-card p{font-size:14px;color:var(--ink-soft);margin:0;flex:1;}
+  .pt-card .btn{align-self:flex-start;margin-top:10px;}
+  @media (max-width:760px){.pt-grid{grid-template-columns:1fr;}}
+  .steps{counter-reset:s;list-style:none;padding:0;margin:18px 0;}
+  .steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:16px;}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border:1px solid var(--accent);color:var(--accent);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .example-link{background:var(--pine);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:14px 18px;margin:16px 0;word-break:break-all;}
+  .example-link .hi{color:var(--accent);}
+  .apply{background:var(--pine);color:var(--cream);padding:56px 0;}
+  .apply .wrap{max-width:760px;}
+  .apply h2{font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:clamp(26px,4vw,34px);margin-bottom:10px;}
+  .apply p.lead-f{color:#d9d2c0;font-size:15.5px;max-width:58ch;margin-bottom:26px;}
+  .apply-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:640px;}
+  .apply-form .full{grid-column:1 / -1;}
+  .apply-form .hint{font-size:12.5px;color:#b7ac93;margin-top:2px;}
+  .apply-form button{grid-column:1 / -1;justify-self:start;}
+  .field select{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.25);color:#F7F2E7;padding:10px 12px;font-family:'Source Serif 4',serif;font-size:15px;border-radius:var(--radius);width:100%;}
+  .field select option{color:#232922;}
+  .field select:focus{outline:none;border-color:var(--accent);}
+  .form-status{background:rgba(75,122,78,0.18);border:1px solid var(--low);color:var(--cream);padding:14px 18px;margin-bottom:24px;max-width:640px;font-family:'IBM Plex Mono',monospace;font-size:13px;}
+  @media (max-width:560px){.apply-form{grid-template-columns:1fr;}}
+  .setup-box{max-width:640px;}
+  .msg{padding:14px 18px;margin:0 0 22px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.6;border:1px solid var(--line);background:var(--paper-2);}
+  .msg.err{border-color:var(--high);color:var(--high);}
+  .msg.ok{border-color:var(--low);}
+  .msg ul{margin:6px 0 0;padding-left:20px;}
+  .linkbox{background:var(--pine);color:var(--cream);font-family:'IBM Plex Mono',monospace;font-size:13px;padding:12px 16px;margin:8px 0 18px;word-break:break-all;}
+  .setup-form{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .setup-form .full{grid-column:1 / -1;}
+  .setup-form .hint{font-size:12.5px;color:#b7ac93;margin-top:2px;}
+  .setup-form button{grid-column:1 / -1;justify-self:start;}
+  .preview{display:none;margin-top:8px;}
+  .preview img{max-height:48px;max-width:180px;background:#F7F2E7;padding:6px 10px;border-radius:2px;}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:#d9d2c0;text-transform:none;letter-spacing:0;font-family:'Source Serif 4',serif;}
+  .check input{width:auto;min-width:0;margin-top:4px;}
+  @media (max-width:560px){.setup-form{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<section class="fw-hero">
+  <div class="wrap">
+    <a class="fw-back" href="partners.html">&larr; Back to coach partners</a>
+    <div class="fw-kicker">COACH SETUP</div>
+    <h1 id="title">Set up your branded link</h1>
+    <p class="lede" id="lede">Add your logo, name, website and a short message. Your branded UERA link goes live within a minute or two of saving.</p>
+  </div>
+</section>
+
+<section class="apply" style="padding:48px 0;">
+  <div class="wrap setup-box">
+    <div id="status" class="msg" hidden></div>
+
+    <div id="done" hidden>
+      <h2 id="doneTitle">Your branded link is live</h2>
+      <p class="lead-f">Share this link with your athletes. It can take a minute or two to appear everywhere.</p>
+      <div class="linkbox" id="liveLink"></div>
+      <p class="lead-f" id="manageNote">We emailed you a private link for changing your logo, name or message later. Keep it to yourself.</p>
+    </div>
+
+    <form id="setupForm" class="setup-form" hidden novalidate>
+      <div class="field full"><label for="f-name">Your name or coaching business</label><input type="text" id="f-name" maxlength="80" required></div>
+      <div class="field full"><label for="f-url">Website (https://)</label><input type="url" id="f-url" placeholder="https://" required></div>
+      <div class="field full" id="slugField"><label for="f-slug">Link name</label><input type="text" id="f-slug" maxlength="31" pattern="[a-z][a-z0-9\-]{1,30}" placeholder="yourname" required>
+        <span class="hint">Your link will be https://uera.jcady.org/?coach=<b id="slugPreview">yourname</b>. You can&rsquo;t change this later.</span></div>
+      <div class="field full"><label for="f-blurb">Message to your athletes</label>
+        <textarea id="f-blurb" maxlength="300" required placeholder="e.g. This assessment was shared with you by Sarah Smith, a certified coach. Want help turning these results into an actual plan? Get in touch."></textarea>
+        <span class="hint"><span id="blurbCount">0</span>/300. Write it as a referral from you, with no links. It can&rsquo;t say you built the tool.</span></div>
+      <div class="field full"><label for="f-logo" id="logoLabel">Logo</label><input type="file" id="f-logo" accept="image/png,image/jpeg,image/webp">
+        <span class="hint">PNG, JPG or WebP, at least 200 px wide, 300 KB or smaller. Shown on a light tile, so a dark or full-color logo works best.</span>
+        <div class="preview" id="preview"><img id="previewImg" alt="Logo preview"></div></div>
+      <div class="field full"><label class="check"><input type="checkbox" id="f-listed"><span>Also list me on the partner section of jcady.org. I&rsquo;m happy for my name, logo, website and message to appear there.</span></label></div>
+      <button type="submit" class="btn" id="submitBtn">Publish my branded link &rarr;</button>
+    </form>
+  </div>
+</section>
+
+<script>
+(function(){
+  // Address of the Cloudflare Worker that handles setup (set after deploying it).
+  var PARTNER_API = 'https://uera-partners.REPLACE_ACCOUNT.workers.dev';
+  var q = new URLSearchParams(window.location.search);
+  var sessionId = q.get('session_id'), manageToken = q.get('manage');
+  var $ = function(id){ return document.getElementById(id); };
+  var statusEl = $('status'), form = $('setupForm');
+
+  function say(kind, html){ statusEl.className = 'msg ' + kind; statusEl.innerHTML = html; statusEl.hidden = false; }
+  function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function errs(list){ say('err', 'Please fix the following:<ul>' + list.map(function(e){ return '<li>' + esc(e) + '</li>'; }).join('') + '</ul>'); statusEl.scrollIntoView({behavior:'smooth', block:'center'}); }
+
+  if(PARTNER_API.indexOf('REPLACE_') !== -1){
+    say('err', 'Setup isn\u2019t switched on yet. Please email <a href="mailto:coach@jcady.org">coach@jcady.org</a> and we\u2019ll set up your link by hand.');
+    return;
+  }
+  if(!sessionId && !manageToken){
+    say('', 'This page opens after you buy a coach license, or from the private link in your setup email. <a href="partners.html">See how branded links work</a>.');
+    return;
+  }
+
+  $('f-slug').addEventListener('input', function(){ $('slugPreview').textContent = this.value || 'yourname'; });
+  $('f-blurb').addEventListener('input', function(){ $('blurbCount').textContent = this.value.length; });
+  $('f-logo').addEventListener('change', function(){
+    var f = this.files && this.files[0], box = $('preview');
+    if(!f){ box.style.display = 'none'; return; }
+    $('previewImg').src = URL.createObjectURL(f); box.style.display = 'block';
+  });
+
+  function showForm(){ form.hidden = false; statusEl.hidden = true; }
+
+  if(manageToken){
+    $('title').textContent = 'Update your branded link';
+    $('lede').textContent = 'Change your name, website, message or logo. Your link name stays the same.';
+    $('slugField').style.display = 'none';
+    $('logoLabel').textContent = 'New logo (optional)';
+    $('submitBtn').textContent = 'Save changes \u2192';
+    fetch(PARTNER_API + '/api/manage?token=' + encodeURIComponent(manageToken)).then(function(r){ return r.json(); }).then(function(d){
+      if(!d.ok){ say('err', 'This manage link isn\u2019t valid. Check the latest email we sent you, or email <a href="mailto:coach@jcady.org">coach@jcady.org</a>.'); return; }
+      if(d.status !== 'active'){ say('err', 'Your coach license is no longer active, so your branding is switched off. Buy a coach license again to reactivate it.'); return; }
+      $('f-name').value = d.name; $('f-url').value = d.url; $('f-blurb').value = d.blurb; $('f-listed').checked = !!d.listed;
+      $('f-slug').value = d.slug; $('blurbCount').textContent = d.blurb.length; showForm();
+    }).catch(function(){ say('err', 'We couldn\u2019t reach the setup service. Please try again in a minute.'); });
+  } else {
+    say('', 'Checking your purchase\u2026');
+    fetch(PARTNER_API + '/api/session?session_id=' + encodeURIComponent(sessionId)).then(function(r){ return r.json(); }).then(function(d){
+      if(!d.ok){ say('err', 'We couldn\u2019t confirm a paid coach license for this link. If you just paid, wait a minute and refresh. Otherwise email <a href="mailto:coach@jcady.org">coach@jcady.org</a>.'); return; }
+      if(d.claimed){ say('ok', 'This purchase is already set up. Use the private manage link we emailed you to make changes.'); return; }
+      showForm();
+    }).catch(function(){ say('err', 'We couldn\u2019t reach the setup service. Please try again in a minute.'); });
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var problems = [], f = $('f-logo').files && $('f-logo').files[0];
+    var name = $('f-name').value.trim(), url = $('f-url').value.trim(), blurb = $('f-blurb').value.trim(), slug = $('f-slug').value.trim().toLowerCase();
+    if(name.length < 2) problems.push('Enter your name or business name.');
+    if(!/^https:\/\//.test(url)) problems.push('Website must start with https://');
+    if(blurb.length < 20) problems.push('Message must be at least 20 characters.');
+    if(!manageToken && !/^[a-z][a-z0-9-]{1,30}$/.test(slug)) problems.push('Link name must be 2 to 31 characters: lowercase letters, numbers and hyphens, starting with a letter.');
+    if(!f && !manageToken) problems.push('Please choose a logo file.');
+    if(f && f.size > 300*1024) problems.push('Logo must be 300 KB or smaller.');
+    if(f && !/^image\/(png|jpeg|webp)$/.test(f.type)) problems.push('Logo must be a PNG, JPG or WebP image.');
+    if(problems.length){ errs(problems); return; }
+
+    var fd = new FormData();
+    if(manageToken) fd.append('token', manageToken); else fd.append('session_id', sessionId);
+    fd.append('slug', slug); fd.append('name', name); fd.append('url', url); fd.append('blurb', blurb);
+    fd.append('listed', $('f-listed').checked ? 'yes' : 'no');
+    if(f) fd.append('logo', f);
+    var btn = $('submitBtn'); btn.disabled = true; btn.textContent = 'Publishing\u2026';
+    fetch(PARTNER_API + '/api/claim', {method:'POST', body:fd}).then(function(r){ return r.json().then(function(d){ return {status:r.status, d:d}; }); }).then(function(res){
+      btn.disabled = false; btn.textContent = manageToken ? 'Save changes \u2192' : 'Publish my branded link \u2192';
+      if(res.d.ok){
+        form.hidden = true; statusEl.hidden = true;
+        $('doneTitle').textContent = res.d.updated ? 'Your changes are saved' : 'Your branded link is live';
+        $('liveLink').textContent = res.d.link; $('done').hidden = false;
+        if(res.d.updated) $('manageNote').textContent = 'Changes can take a minute or two to appear.';
+        window.scrollTo(0, 0);
+      } else { errs(res.d.errors || [res.d.error || 'Something went wrong. Please try again.']); }
+    }).catch(function(){ btn.disabled = false; btn.textContent = 'Try again'; errs(['We couldn\u2019t reach the setup service. Please try again in a minute.']); });
+  });
+})();
+</script>
+</body>
+</html>

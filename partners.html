@@ -160,7 +160,7 @@
     <div class="fw-kicker">FOR COACHES</div>
     <h1>Your athletes, your name on the report</h1>
     <p class="lede">Send your athletes a link to the Ultra Event Readiness &amp; Risk Assessment that carries your logo and name &mdash; on the start page, at the top of their results, and on their PDF report &mdash; with a direct path back to you.</p>
-    <a class="btn" href="#apply" style="margin-top:28px;display:inline-block;">Apply for a Branded Link &rarr;</a>
+    <a class="btn" href="#licensing" style="margin-top:28px;display:inline-block;">Get a Coach License &rarr;</a>
   </div>
 </section>
 
@@ -189,7 +189,7 @@
 
 <section class="fw-section">
   <div class="wrap">
-    <div class="fw-kicker">LICENSING</div>
+    <div class="fw-kicker" id="licensing">LICENSING</div>
     <h2>Branded links come with a coach license</h2>
     <p>Using UERA with your own coached athletes requires a coach license. Personal use stays free for athletes. Pricing and terms are the same ones shown in the tool&rsquo;s License screen.</p>
     <div class="pt-grid">
@@ -220,28 +220,28 @@
     <div class="fw-kicker">HOW IT WORKS</div>
     <h2>From application to live link</h2>
     <ol class="steps">
-      <li><strong>Get a license</strong> above, if you don&rsquo;t have one yet.</li>
-      <li><strong>Apply below</strong> with your name, business, website, the short name you want in your link, and a two-sentence message to your athletes.</li>
-      <li><strong>Send your logo.</strong> I&rsquo;ll email you after you apply. Send it as a PNG or SVG with a transparent or white background, at least 400 px wide and under 300 KB. It is shown on a light tile, so a dark or full-color logo works best.</li>
-      <li><strong>I review and publish.</strong> Each coach is added by hand, which keeps the tool trustworthy for athletes. I&rsquo;ll send you your finished link and check it with you before it goes out.</li>
+      <li><strong>Buy a coach license</strong> above.</li>
+      <li><strong>Set up your branding.</strong> Right after you pay you land on a setup page. Enter your name, website, a short message to your athletes, and upload your logo (PNG, JPG or WebP, at least 200 px wide, under 300 KB). It is shown on a light tile, so a dark or full-color logo works best.</li>
+      <li><strong>It goes live in a minute or two.</strong> You get an email with your link and a private link for changing your branding later. Closed the page before finishing? The same setup link is in your email.</li>
+      <li><strong>It stays live while your license is active.</strong> If your subscription ends, your branding switches off automatically, and buying again switches it back on.</li>
     </ol>
-    <p>I may decline or remove a branded link, for example if a license has lapsed or the branding could mislead athletes about who built the tool. Applying doesn&rsquo;t guarantee approval.</p>
+    <p>Your branding is checked automatically when you save it (https website, a real image, no links or claims to have built the tool in your message). I may still remove a branded link, for example if it could mislead athletes about who built the tool.</p>
   </div>
 </section>
 
 <section id="apply" class="apply">
   <div class="wrap">
-    <h2>Apply for a branded link</h2>
-    <p class="lead-f">Tell me a bit about your coaching. I&rsquo;ll reply by email to confirm your license, ask for your logo, and set up your link.</p>
+    <h2>Questions, or need it set up by hand?</h2>
+    <p class="lead-f">Most coaches won&rsquo;t need this form, because setup happens right after you buy. Use it if you have a Team License with several coaches, want a hand getting set up, or have a question before you buy. I&rsquo;ll reply by email.</p>
     <div id="applyStatus" class="form-status" hidden>Thanks &mdash; that&rsquo;s sent. I&rsquo;ll email you to confirm details and ask for your logo.</div>
     <form id="applyForm" class="apply-form" action="https://formspree.io/f/moeqvykw" method="POST">
       <div class="field"><label for="ap-name">Your name</label><input type="text" id="ap-name" name="name" required autocomplete="name"></div>
       <div class="field"><label for="ap-email">Email</label><input type="email" id="ap-email" name="email" required autocomplete="email"></div>
-      <div class="field"><label for="ap-biz">Business or coaching name</label><input type="text" id="ap-biz" name="business" required></div>
-      <div class="field"><label for="ap-site">Website (https://)</label><input type="url" id="ap-site" name="website" required placeholder="https://"></div>
-      <div class="field"><label for="ap-slug">Link name</label><input type="text" id="ap-slug" name="requested_slug" required pattern="[a-z][a-z0-9\-]{1,30}" placeholder="yourname"><span class="hint">Lowercase letters, numbers, hyphens. Becomes ?coach=yourname</span></div>
-      <div class="field"><label for="ap-license">Coach license</label>
-        <select id="ap-license" name="license_status" required>
+      <div class="field"><label for="ap-biz">Business or coaching name (optional)</label><input type="text" id="ap-biz" name="business"></div>
+      <div class="field"><label for="ap-site">Website (optional)</label><input type="url" id="ap-site" name="website" placeholder="https://"></div>
+      <div class="field"><label for="ap-slug">Link name you&rsquo;d like (optional)</label><input type="text" id="ap-slug" name="requested_slug" pattern="[a-z][a-z0-9\-]{1,30}" placeholder="yourname"><span class="hint">Lowercase letters, numbers, hyphens. Becomes ?coach=yourname</span></div>
+      <div class="field"><label for="ap-license">Coach license (optional)</label>
+        <select id="ap-license" name="license_status">
           <option value="">Choose one</option>
           <option>I have an Individual Coach License</option>
           <option>I have a Team License</option>
@@ -249,18 +249,17 @@
           <option>Not yet, I have questions first</option>
         </select>
       </div>
-      <div class="field full"><label for="ap-blurb">Message to your athletes (about 240 characters)</label>
-        <textarea id="ap-blurb" name="athlete_message" maxlength="300" required placeholder="e.g. This assessment was shared with you by Sarah Smith, a certified coach. Want help turning these results into an actual plan? Get in touch."></textarea>
-        <span class="hint">Write it as a referral from you. It shouldn&rsquo;t claim you built the tool.</span>
+      <div class="field full"><label for="ap-blurb">Your question or message</label>
+        <textarea id="ap-blurb" name="message" maxlength="1000" required placeholder="e.g. We are a team of four coaches and want a branded link for each of us."></textarea>
       </div>
       <div class="field full"><label for="ap-cert">Certifications or credentials (optional)</label><input type="text" id="ap-cert" name="credentials"></div>
       <div class="field full"><label style="display:flex;gap:10px;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:14px;color:#d9d2c0;font-family:'Source Serif 4',serif;">
         <input type="checkbox" name="list_on_jcady_org" value="yes" style="width:auto;min-width:0;margin-top:4px;">
         <span>Also list me on the partner section of jcady.org (optional). I&rsquo;m happy for my name, logo, website and message to appear there.</span></label></div>
       <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-      <input type="hidden" name="_subject" value="Partner application &mdash; UERA branded link">
+      <input type="hidden" name="_subject" value="Partner question &mdash; UERA branded link">
       <input type="hidden" name="_next" id="ap-next" value="">
-      <button type="submit" class="btn">Send Application &rarr;</button>
+      <button type="submit" class="btn">Send Message &rarr;</button>
     </form>
   </div>
 </section>
