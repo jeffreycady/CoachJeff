@@ -132,6 +132,18 @@
     .inquiry-form .field:nth-child(3), .inquiry-form .field:nth-child(4){grid-column:auto;}
   }
 
+  /* ---------- UERA COACH PARTNERS ---------- */
+  .partner-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--line-soft);border:1px solid var(--line-soft);margin-bottom:28px;}
+  .partner-card{background:var(--paper-2);padding:22px;display:flex;flex-direction:column;gap:10px;}
+  .partner-card .plogo{height:44px;display:flex;align-items:center;}
+  .partner-card .plogo img{max-height:44px;max-width:170px;width:auto;height:auto;display:block;}
+  .partner-card h4{font-family:'Big Shoulders Display',sans-serif;font-size:20px;font-weight:700;margin:0;}
+  .partner-card p{font-size:14px;color:var(--ink-soft);margin:0;flex:1;}
+  .partner-card .plinks{display:flex;gap:16px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+  .partner-card .plinks a{color:var(--accent);}
+  .partner-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;background:var(--pine);color:var(--cream);padding:24px 26px;}
+  .partner-cta p{margin:0;max-width:56ch;font-size:15px;color:#d9d2c0;}
+
   /* ---------- COACHING PACKAGES ---------- */
   .packages-grid{
     display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
@@ -333,6 +345,19 @@
     </div>
   </section>
 
+  <section id="partners">
+    <div class="wrap">
+      <h2 class="section-title" id="partnersTitle">For Coaches</h2>
+      <p class="section-sub" id="partnersSub">Offer your athletes a link to the Readiness Check that carries your logo and name &mdash; on the start page, the results, and the PDF report.</p>
+      <div id="partnerGrid" class="partner-grid" hidden></div>
+      <div class="partner-cta">
+        <p>Coaches get a branded link, and athletes keep the same privacy: nothing they enter is stored or sent to anyone.</p>
+        <a class="btn" href="partners.html">Become a UERA Partner &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
 </main>
 
 <footer id="contact" class="site-footer-full">
@@ -392,6 +417,48 @@
   document.querySelectorAll('.ring[data-ring]').forEach(el=>{
     el.innerHTML = waypointIcon(el.dataset.ring, 44);
   });
+
+
+  // ---- UERA coach partners ----
+  // The single list of partners lives in the UERA repo (partners/partners.json).
+  // Only coaches who opted in to being listed (listed:true) appear here. The section
+  // simply shows the "become a partner" invitation if the list is empty or unreachable.
+  (function(){
+    var grid = document.getElementById('partnerGrid');
+    if(!grid || !window.fetch) return;
+    var BASE = 'https://uera.jcady.org/';
+    var okUrl = /^https:\/\//, okLogo = /^partners\/[a-z0-9-]+\.(png|svg|webp|jpe?g)$/, okSlug = /^[a-z][a-z0-9-]{1,30}$/;
+    function el(tag, cls, text){ var e=document.createElement(tag); if(cls) e.className=cls; if(text) e.textContent=text; return e; }
+    function link(href, text){ var a=el('a',null,text); a.href=href; a.target='_blank'; a.rel='noopener'; return a; }
+    fetch(BASE + 'partners/partners.json', {cache:'no-cache'}).then(function(r){
+      return r.ok ? r.json() : null;
+    }).then(function(data){
+      var list = data && data.partners;
+      if(!list || typeof list !== 'object') return;
+      var shown = 0;
+      Object.keys(list).forEach(function(slug){
+        var p = list[slug];
+        if(!p || p.listed !== true || !okSlug.test(slug) || !okUrl.test(p.url||'') || !p.name) return;
+        var card = el('div','partner-card');
+        if(p.logo && okLogo.test(p.logo)){
+          var box = el('div','plogo'), img = document.createElement('img');
+          img.src = BASE + p.logo; img.alt = p.name + ' logo'; img.onerror = function(){ box.remove(); };
+          box.appendChild(img); card.appendChild(box);
+        }
+        card.appendChild(el('h4',null,String(p.name).slice(0,80)));
+        if(p.blurb) card.appendChild(el('p',null,String(p.blurb).slice(0,300)));
+        var links = el('div','plinks');
+        links.appendChild(link(p.url,'Visit site \u2192'));
+        links.appendChild(link(BASE + '?coach=' + slug,'Try UERA with ' + String(p.name).slice(0,80) + ' \u2192'));
+        card.appendChild(links); grid.appendChild(card); shown++;
+      });
+      if(shown){
+        grid.hidden = false;
+        document.getElementById('partnersTitle').textContent = 'UERA Coach Partners';
+        document.getElementById('partnersSub').textContent = 'Coaches who share the Readiness Check with their athletes. Each link opens UERA with that coach\u2019s name and logo.';
+      }
+    }).catch(function(){});
+  })();
 
   // Point Formspree's redirect back at this exact page, whatever domain
   // it ends up live on, and land on the contact section with ?sent=true.
