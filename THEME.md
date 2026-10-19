@@ -78,3 +78,15 @@ every repo that uses them.
 - The topo contour texture on dark hero/header sections.
 - Risk-tier coloring (green/amber/red) for anything that scores or
   flags — only pull this in if the page actually rates something.
+
+## Site mark (the cairn)
+
+Every JCady LLC site shows the cairn: a small mark at the top of the hero, linking home, and the browser-tab icon.
+Copy `cairn.svg` and `favicon.svg` with `theme.css`, then:
+
+```html
+<link rel="icon" href="favicon.svg" type="image/svg+xml">   <!-- in <head> -->
+<a class="site-mark" href="https://www.jcady.org/" aria-label="jcady.org home"><img src="cairn.svg" alt="" width="44" height="44"></a>   <!-- first thing in the hero's .wrap -->
+```
+
+Pages branded for a partner or a coach (their name and logo) don't show it.
