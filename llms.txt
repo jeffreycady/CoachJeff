@@ -1,0 +1,18 @@
+# Jeff Cady, ultrarunning coach
+
+> UESCA certified ultrarunning coach in Arizona. Training plans built like a risk assessment: find what could derail your race, then build the safeguards before it does. Home of the Ultra Event Readiness & Risk Assessment (UERA).
+
+## Pages
+
+- [Coaching](https://www.jcady.org/): about Jeff and his coaching
+- [The UERA framework](https://www.jcady.org/framework.html): the scoring math, why checkpoints differ by discipline, and the sources behind every question
+- [Every question, answer and source](https://www.jcady.org/questions.html): the complete UERA question set
+- [For coaches](https://www.jcady.org/partners.html): a branded UERA link with the coach's logo on the start page, results and PDF report
+
+## Tools
+
+- [Ultra Event Readiness & Risk Assessment](https://uera.jcady.org/): ten checkpoints (terrain, environment, gear, fueling, training, safety and more) for ultra races and multi-day hikes
+
+## Related
+
+- [Jeff Cady Security](https://security.jcady.org/): vCISO and security consulting

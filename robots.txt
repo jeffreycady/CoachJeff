@@ -1,0 +1,8 @@
+# www.jcady.org (Jeff Cady, ultrarunning coach). Search and AI crawlers are welcome.
+# Content signals (https://contentsignals.org): search, AI answers and AI training are all allowed.
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+Disallow: /partners-setup.html
+
+Sitemap: https://www.jcady.org/sitemap.xml
