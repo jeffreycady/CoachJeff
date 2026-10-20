@@ -191,6 +191,12 @@
     .process::before{display:none;}
     .tool-callout{flex-direction:column;align-items:flex-start;}
   }
+
+  /* ---------- Rounded corners (boxes that were square) ----------
+     Radius tokens come from theme.css. :where() keeps these at zero
+     specificity, so they never override a radius set anywhere else. */
+  :where(.packages-grid){border-radius:var(--radius-md);overflow:hidden;} /* package cards stay square inside it */
+  :where(.partner-cta){border-radius:var(--radius-md);}
 </style>
 </head>
 <body>

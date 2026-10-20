@@ -123,6 +123,11 @@
     margin-bottom:14px;
   }
   .fw-cta p{color:#d9d2c0;max-width:52ch;margin:0 auto 28px;font-size:15.5px;}
+
+  /* ---------- Rounded corners (boxes that were square) ----------
+     Radius tokens come from theme.css. :where() keeps these at zero
+     specificity, so they never override a radius set anywhere else. */
+  :where(.checkpoint-grid .cp,.formula-block,.matrix-wrap){border-radius:var(--radius-md);} /* .matrix-wrap already scrolls, so it clips the table */
 </style>
 </head>
 <body>

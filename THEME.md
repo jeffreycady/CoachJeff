@@ -40,6 +40,11 @@ every repo that uses them.
 | `--accent` | `#CB5A28` | Trail-blaze orange — CTAs, links, highlights |
 | `--cream` | `#F7F2E7` | Light text on dark backgrounds |
 | `--dim` | `#c8b190` | Muted light text on dark backgrounds (eyebrows, captions) |
+| `--radius-sm` | `8px` | Inputs, selects, textareas |
+| `--radius-md` | `12px` | Cards, panels, callouts, grid containers |
+| `--radius-lg` | `14px` | Dialogs, hero cards |
+| `--radius-pill` | `999px` | Pill shapes |
+| `--radius` | `2px` | Buttons (`.btn`) — unchanged |
 | `--low` / `--mid` / `--high` | green / amber / red | Only for tools that score or rate something |
 
 ## Typography
