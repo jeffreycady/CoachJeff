@@ -156,6 +156,12 @@
   .field select:focus{outline:none;border-color:var(--accent);}
   .form-status{background:rgba(75,122,78,0.18);border:1px solid var(--low);color:var(--cream);padding:14px 18px;margin-bottom:24px;max-width:640px;font-family:'IBM Plex Mono',monospace;font-size:13px;}
   @media (max-width:560px){.apply-form{grid-template-columns:1fr;}}
+
+  /* ---------- Rounded corners (boxes that were square) ----------
+     Radius tokens come from theme.css. :where() keeps these at zero
+     specificity, so they never override a radius set anywhere else. */
+  :where(.pt-grid){border-radius:var(--radius-md);overflow:hidden;} /* tier cards stay square inside it */
+  :where(.example-link){border-radius:var(--radius-md);}
 </style>
 </head>
 <body>
