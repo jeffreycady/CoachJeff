@@ -44,7 +44,7 @@ every repo that uses them.
 | `--radius-md` | `12px` | Cards, panels, callouts, grid containers |
 | `--radius-lg` | `14px` | Dialogs, hero cards |
 | `--radius-pill` | `999px` | Pill shapes |
-| `--radius` | `2px` | Buttons (`.btn`) — unchanged |
+| `--radius` | `8px` | Same as `--radius-sm` (was 2px); buttons (`.btn`) use `--radius-sm` |
 | `--low` / `--mid` / `--high` | green / amber / red | Only for tools that score or rate something |
 
 ## Typography
