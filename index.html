@@ -19,11 +19,37 @@
      than the theme's default hero heading size. */
   .hero{
     padding:88px 0 64px;
+    /* Night-race portrait on the right; the left fades to solid so the
+       name and buttons never sit on top of the photo. Previous photo is
+       still in the repo as hero-photo.jpg. */
+    background-color:#080c09;
     background-image:
-      linear-gradient(120deg, rgba(27,42,31,0.93) 0%, rgba(27,42,31,0.82) 45%, rgba(27,42,31,0.58) 100%),
-      url('hero-photo.jpg');
-    background-size:cover;
-    background-position:62% 30%;
+      linear-gradient(90deg, #080c09 0%, #080c09 68%, rgba(8,12,9,0.6) 76%, rgba(8,12,9,0) 90%),
+      url('hero-photo-night.jpg');
+    background-repeat:no-repeat;
+    background-size:auto 100%;
+    background-position:right center;
+  }
+  @media (max-width:980px){
+    /* Tablet and phone: photo across the top, fading into the text below it. */
+    .hero{
+      padding-top:400px;
+      background-image:
+        linear-gradient(90deg, #080c09 calc(50% - 260px), rgba(8,12,9,0) calc(50% - 130px), rgba(8,12,9,0) calc(50% + 130px), #080c09 calc(50% + 260px)),
+        linear-gradient(180deg, rgba(8,12,9,0) 0, rgba(8,12,9,0) 300px, #080c09 620px),
+        url('hero-photo-night.jpg');
+      background-size:auto, auto, min(100%, 520px) auto;
+      background-position:top center;
+    }
+  }
+  @media (max-width:520px){
+    .hero{
+      padding-top:330px;
+      background-image:
+        linear-gradient(180deg, rgba(8,12,9,0) 0, rgba(8,12,9,0) 250px, #080c09 520px),
+        url('hero-photo-night.jpg');
+      background-size:auto, 100% auto;
+    }
   }
   .hero::before{display:none;}
   .hero h1{font-size:clamp(52px, 11vw, 96px); line-height:0.9;}
